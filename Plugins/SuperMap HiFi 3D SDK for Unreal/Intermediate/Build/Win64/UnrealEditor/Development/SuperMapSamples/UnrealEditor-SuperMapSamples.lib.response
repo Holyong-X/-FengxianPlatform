@@ -1,0 +1,16 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-SuperMapSamples.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Unreal Engine\Project\FengxianPlatform\Intermediate\Build\Win64\FengxianPlatformEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\Module.SuperMapSamples.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\Module.SuperMapSamples.gen.1_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\Module.SuperMapSamples.gen.2_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\Module.SuperMapSamples.gen.3_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\Module.SuperMapSamples.gen.4_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\Default.rc2.res"
+/OUT:"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMapSamples\UnrealEditor-SuperMapSamples.lib"

@@ -1,0 +1,13 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\unrealeditor\\inc\\fengxianplatform\\fengxianplatform.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\fengxianplatformeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\unrealeditor\\development\\fengxianplatform\\definitions.fengxianplatform.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

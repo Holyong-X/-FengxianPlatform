@@ -1,0 +1,39 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+
+using UnrealBuildTool;
+using System.IO;
+public class MtlBaking : ModuleRules
+{
+	public MtlBaking(ReadOnlyTargetRules Target) : base(Target)
+	{
+        PrivateDependencyModuleNames.AddRange(
+			new string [] {
+				"Core",
+				"CoreUObject",
+				"Engine",
+				"RenderCore",
+                "RHI",
+                "MainFrame",
+                "SlateCore",
+                "Slate",
+                "InputCore",
+                "PropertyEditor",
+                "EditorStyle",
+                "Renderer",
+                "MeshDescription",
+				"StaticMeshDescription"
+            }
+		);
+        if (Target.bBuildEditor == true)
+        {
+            PublicDependencyModuleNames.AddRange(
+                new string[]{
+                    "UnrealEd",
+            });
+        }
+        // NOTE: ugly hack to access HLSLMaterialTranslator to bake shading model
+        PrivateIncludePaths.Add(EngineDirectory + "/Source/Runtime/Engine/private");
+		// NOTE: avoid renaming all instaces of MATERIALBAKING_API by redirecting it to GLTFMATERIALBAKING_API
+		PublicDefinitions.Add("MATERIALBAKING_API=GLTFMATERIALBAKING_API");
+    }
+}

@@ -1,0 +1,1404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\FengxianPlatform.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\FengxianPlatform.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\FengxianPlatformEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\LICENSE" />
+    <None Include="..\..\README.md" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Config\HoloLens">
+      <UniqueIdentifier>{4C8DD267-CDE7-336F-8602-F5F485D22BAB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\HoloLens\HoloLensEngine.ini">
+      <Filter>Config\HoloLens</Filter>
+    </None>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{BB38096A-B391-30DC-A0D4-4F3EA6B44507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal">
+      <UniqueIdentifier>{28836009-2103-3D8C-A53B-8A7BF3E17F9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source">
+      <UniqueIdentifier>{7874767A-4072-3987-B2FE-C8813C016D39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer">
+      <UniqueIdentifier>{CCB8561D-2852-38E1-931A-3DB46C61C6B0}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\MtlAnalyzer.Build.cs">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private">
+      <UniqueIdentifier>{8D676D08-3B02-3071-9A00-1F1045453CD6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private\MtlAnalyzer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private\MtlAnalyzerModule.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private\ProxyMtlCompiler.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Private</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public">
+      <UniqueIdentifier>{B743C970-F198-3763-904C-3C34596804C6}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public\MtlAnalysis.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public\MtlAnalyzer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public\MtlAnalyzerModule.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlAnalyzer\Public</Filter>
+    </ClInclude>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\SuperMap.uplugin">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Config">
+      <UniqueIdentifier>{C7993053-CA1C-3823-BFDA-0B1DC42C2CC4}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Config\FilterPlugin.ini">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Config</Filter>
+    </None>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Config\Supermap.ini">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Config</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Resources">
+      <UniqueIdentifier>{08F4B25C-82B6-3021-862E-1640E18AD36C}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Resources\Icon128.png">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Resources</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking">
+      <UniqueIdentifier>{517CBDF7-72EB-3AF8-BBD4-9E855975FC39}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\MtlBaking.Build.cs">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private">
+      <UniqueIdentifier>{504411D4-608F-36B6-B686-E5E93C830C2E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\AddCustomAttributeHack.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\AddCustomAttributeHack.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\ExportMaterialProxy.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialBakingHelpers.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialBakingModule.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialBakingModule.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialPropertyEx.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialRenderItem.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialRenderItem.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialRenderItemData.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private\MaterialRenderItemData.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Private</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public">
+      <UniqueIdentifier>{E96460D5-858A-3922-BB04-91DB9B129BF6}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public\IMaterialBakingModule.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public\MaterialBakingHelpers.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public\MaterialBakingStructures.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public\MaterialPropertyEx.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\MtlBaking\Public</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap">
+      <UniqueIdentifier>{DA11A8A7-3DE2-3001-8027-D279E89551CD}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\SuperMap.Build.cs">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private">
+      <UniqueIdentifier>{295A254B-0BD5-3D77-8EB4-40DB3B030F0F}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SuperMap.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D">
+      <UniqueIdentifier>{7F73F288-7BD7-35D3-B3B7-A8071B69FF43}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D\CoordSysTranslator.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D\KdTree.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D\MathEngine.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D\PrjCoordSys.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Algorithm3D</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Base3D">
+      <UniqueIdentifier>{2CD98544-6446-3F56-8A11-00C114700A82}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Base3D\Plane.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Base3D</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component">
+      <UniqueIdentifier>{EF2F4748-57D8-337A-9EB0-34EB5FCF3BEC}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\CustomRealRasterMesh.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMapColorVertexBuffer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMapPositionVertexBuffer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMapStaticMeshVertexBuffer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_BillboardActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_BillboardComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_CaptureSceneActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_CustomVectorActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_CustomVertexBuffer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_CustomVertexFactory.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_CustomVertexFactory.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_GeoreferenceComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_InstancedActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_InstancedStaticMeshComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_LineMeshComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_LineMeshSceneProxy.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_LineVertexBuffer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_LineVertexFactory.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_LineVertexFactory.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_MaterialBillboardComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_MeshComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_MeshComponentInterface.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_MeshSceneProxy.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_OcclusionVolumeComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_PolyLineMeshComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_PolyLineMeshSceneProxy.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_ProceduralMeshComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_ROEntityActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_SphereActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_SplineActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_StaticMeshActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_StaticMeshComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_TextActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component\SuperMap_VertexBuffer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Component</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\ControlUE">
+      <UniqueIdentifier>{949CC0DA-F31F-3790-8C65-FBFE23F35475}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\ControlUE\CameraControl.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\ControlUE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\ControlUE\RealspaceView.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\ControlUE</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core">
+      <UniqueIdentifier>{6726B151-D6C3-3CF9-B251-EAFED08F1DFD}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Analyst3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\AssetStyle.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\AttributeFields.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\CameraState.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\CloudLicense.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\FlyManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Georeference.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\GlobalImage.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\HypsometricSetting.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\JobScheduler.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DDatasetModel.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DDatasetVector.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DDatasetVectorLine.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DDatasetVectorPoint.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DDatasetVectorRegion.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DImageFile.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DKML.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3Ds.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DS3MFile.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Layer3DServeiceMaps.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Query3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\RealspaceDLL.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\ROCacheManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Routes.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Scene.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\SceneControl.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\SceneEditorWnd.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Selection3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\SlopeSetting.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Style3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\TerrainLayer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\TerrainLayers.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\TrackingLayer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Handler">
+      <UniqueIdentifier>{FB543A35-F8D4-3974-A278-B8DEA83C4D52}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Handler\MeasureHandler.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Core\Handler</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data">
+      <UniqueIdentifier>{CCAC4B86-F417-3C4D-999A-37178DFB517D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\AssetLibrary.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Collection.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Collections.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\DataServiceRequest.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Dataset.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\DataSource.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\DataSources.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoBox.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoLine.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoLine3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Geometry.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Geometry3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoModel3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoPoint3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoRegion.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\GeoRegion3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\JsonFile.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\LineCollection.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Matrix4d.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\PointCollection.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Rectangle2D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\RegionCollection.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\UnrealWorkspaceManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Vector2d.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Vector3d.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Vector4d.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data\Workspace.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Data</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange">
+      <UniqueIdentifier>{0E513A9F-C574-3893-86C6-0E652C326CDB}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange\MaterialConverter.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange\MaterialUtility.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange\MeshData.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange\NameUtility.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange\TexUtility.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\DataExchange</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor">
+      <UniqueIdentifier>{9AC19CB7-3D33-3BE4-8055-DD6BD5DEEBB5}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor\SuperMap_Pawn.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor\SuperMap_PlayerCameraManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor\SuperMap_PlayerController.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor\SuperMap_SkyAtmosphere.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor\SuperMap_Star.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Editor</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D">
+      <UniqueIdentifier>{6DDE8C14-DED2-3A9A-87E9-B41137EEFF89}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameCamera.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameComponent.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameConvertor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameEntity.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameEntityBase.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameEntityManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameInstanceEntity.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameLifetime.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameMaterial.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameMaterialManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameObjectManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameOcclusionVolume.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameRenderTexture.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameRenderTextureManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameStruct.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameTexture.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D\GameTextureManager.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Graphics3D</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render">
+      <UniqueIdentifier>{67C4218B-2A86-3835-B083-8EC46617A4C2}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render\CustomRenderTargetInfo.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render\DrawBox.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render\RenderModel3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render\RenderObject.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render\TextureRenderer.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\Render</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst">
+      <UniqueIdentifier>{6E2687B3-1D3B-304F-B19F-AF87EFC5D3EE}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst\CalculationTerrain.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D">
+      <UniqueIdentifier>{F7C69843-B862-315F-9F88-2960C43AC830}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\Cluster.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\Facade.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\MultiViewShed3D.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\Profile.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\ProjectionImage.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\Sightline.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\Skyline.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\ViewDome.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D\ViewShed.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Private\SpatialAnalyst3D</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public">
+      <UniqueIdentifier>{772B7BFF-4A09-367C-A019-AE26091E2D07}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SuperMap.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D">
+      <UniqueIdentifier>{8143E61F-93E8-3D86-BB1B-FEC88F92A824}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D\CoordSysTranslator.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D\KdTree.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D\MathEngine.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D\PrjCoordSys.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Algorithm3D</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D">
+      <UniqueIdentifier>{A2E31527-1E8C-3A8C-9503-E74FC0A3457A}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D\CommonDefine.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D\MaterialDefine.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D\Plane.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D\StatsGroupDefine.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Base3D</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component">
+      <UniqueIdentifier>{34FADD27-59E6-350B-A77F-B197A1D843E0}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\CustomRealRasterMesh.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\MeshData.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMapColorVertexBuffer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMapPositionVertexBuffer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMapStaticMeshVertexBuffer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMapStaticMeshVertexData.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_BillboardActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_BillboardComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_CaptureSceneActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_CustomVectorActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_CustomVertexBuffer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_GeoreferenceComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_InstancedActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_InstancedStaticMeshComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_LineMeshComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_LineMeshSceneProxy.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_LineVertexBuffer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_MaterialBillboardComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_MeshComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_MeshComponentInterface.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_MeshSceneProxy.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_OcclusionVolumeComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_PolyLineMeshComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_PolyLineMeshSceneProxy.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_ProceduralMeshComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_ROEntityActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_SphereActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_SplineActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_StaticMeshActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_StaticMeshComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_TextActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component\SuperMap_VertexBuffer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Component</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\ControlUE">
+      <UniqueIdentifier>{80DCABA2-8EF5-369A-A1BC-B93DC5C4A9C7}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\ControlUE\CameraControl.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\ControlUE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\ControlUE\RealspaceView.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\ControlUE</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core">
+      <UniqueIdentifier>{2C563D3E-D4EE-30EA-9AE2-758293036BFF}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Analyst3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\AssetStyle.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\AttributeFields.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\CameraState.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\ClipMode.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\CloudLicense.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\FlyManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Georeference.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\GlobalImage.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\HypsometricSetting.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\JobScheduler.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DDatasetModel.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DDatasetVector.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DDatasetVectorLine.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DDatasetVectorPoint.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DDatasetVectorRegion.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DImageFile.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DInfo.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DKML.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3Ds.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DS3MFile.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DServeiceMaps.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Layer3DType.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\PBRMaterialParam.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Query3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\RealspaceDLL.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\ROCache.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\ROCacheManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Routes.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Scene.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\SceneControl.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\SceneEditorWnd.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\SceneType.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Selection3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\SlopeSetting.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Style3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\TerrainLayer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\TerrainLayers.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\TrackingLayer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Handler">
+      <UniqueIdentifier>{AA70F77B-A860-3F59-BBCE-F237392B4212}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Handler\MeasureHandler.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Core\Handler</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data">
+      <UniqueIdentifier>{E85F9F77-6D87-3DCA-B74F-66955B761D6B}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\AssetLibrary.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Collection.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Collections.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\DataServiceRequest.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Dataset.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\DataSource.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\DataSources.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\FieldInfo.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoBox.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoLine.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoLine3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Geometry.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Geometry3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeometryType.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoModel3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoPoint3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoRegion.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\GeoRegion3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\JsonFile.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\LineCollection.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Matrix4d.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\PointCollection.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Rectangle2D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\RegionCollection.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\UnrealWorkspaceManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Vector2d.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Vector3d.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Vector4d.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data\Workspace.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Data</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange">
+      <UniqueIdentifier>{EE92328B-4DC7-367B-A8CA-4848A5B68E14}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange\MaterialConverter.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange\MaterialUtility.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange\MeshData.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange\NameUtility.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange\TexUtility.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\DataExchange</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor">
+      <UniqueIdentifier>{CBADEE97-A21A-3A84-B1BD-E296603C9441}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor\SuperMap_Pawn.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor\SuperMap_PlayerCameraManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor\SuperMap_PlayerController.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor\SuperMap_SkyAtmosphere.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor\SuperMap_Star.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Editor</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D">
+      <UniqueIdentifier>{CA69721C-8214-3B5B-984E-00F961F60A17}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameCamera.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameComponent.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameConvertor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameEntity.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameEntityBase.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameEntityManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameEnum.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameInstanceEntity.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameLifetime.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameMaterial.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameMaterialManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameObjectManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameOcclusionVolume.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameRenderTexture.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameRenderTextureManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameStruct.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameTexture.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D\GameTextureManager.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Graphics3D</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render">
+      <UniqueIdentifier>{4203DC64-69B2-3631-BDC9-B72730E88A06}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render\CustomRenderTargetInfo.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render\DrawBox.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render\RenderModel3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render\RenderObject.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render\TextureRenderer.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\Render</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst">
+      <UniqueIdentifier>{92936218-F5F2-360E-B307-2A0B4459C6CC}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst\CalculationTerrain.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D">
+      <UniqueIdentifier>{938EEA49-024A-3776-AFD8-CB27E38CDE91}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\Cluster.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\Facade.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\MultiViewShed3D.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\Profile.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\ProjectionImage.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\Sightline.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\Skyline.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\ViewDome.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D\ViewShed.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMap\Public\SpatialAnalyst3D</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples">
+      <UniqueIdentifier>{57D36DDB-4888-3D0E-A5EE-443537D1F0AA}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\SuperMapSamples.Build.cs">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples</Filter>
+    </None>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private">
+      <UniqueIdentifier>{CD0110EF-A895-399D-8A9F-4DF579949BE3}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\FSuperMap_MouseControl.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMapSamples.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMap_AttributeQuery.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMap_CloudLicense.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMap_EditorMode.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMap_EditorModeToolkit.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMap_GIS.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SuperMap_MainActor.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\HandlerSamples">
+      <UniqueIdentifier>{389A5383-3025-32EA-BD11-57E9D813937B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\HandlerSamples\SuperMap_MeasureHandler.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\HandlerSamples</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation">
+      <UniqueIdentifier>{A2F266EC-B66C-3490-BA2A-2FD4338B6B40}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_DataInfoProcessing.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_DataServiceRequest.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_ExcavationInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_FlyManagerInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_FlyPositionInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_GeometryQuery.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_ObjectOperation.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_RectSelect.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation\SuperMap_SwipeInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SceneOperation</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis">
+      <UniqueIdentifier>{D013CCDA-575B-30A3-AEE3-9C044E72308B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_CalculationTinInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ClipBoxInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ClusterInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ContourMapInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_FacadeInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_FlattenInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_FloodInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_MultiViewShed3DInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ProfileInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ProjectionImageInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_SightlineInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_SkylineInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_SlopeInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ViewDomeInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis\SuperMap_ViewShedInstance.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\SpatialAnalysis</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\Toolkit">
+      <UniqueIdentifier>{2496FE3A-60D4-3A2A-9117-75A3587BD1DF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\Toolkit\SuperMap_DetailsViewInfos.cpp">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Private\Toolkit</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public">
+      <UniqueIdentifier>{FC1CE35B-1A1A-3D84-9FF7-A60C4094802D}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\FSuperMap_MouseControl.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMapSamples.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMap_AttributeQuery.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMap_CloudLicense.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMap_EditorMode.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMap_EditorModeToolkit.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMap_GIS.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SuperMap_MainActor.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\HandlerSamples">
+      <UniqueIdentifier>{3A84AB7C-BA15-3035-900A-6D3B470550D2}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\HandlerSamples\SuperMap_MeasureHandler.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\HandlerSamples</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation">
+      <UniqueIdentifier>{4344A81D-5F21-30D6-8DFB-10158338AA6D}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_DataInfoProcessing.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_DataServiceRequest.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_ExcavationInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_FlyManagerInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_FlyPositionInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_GeometryQuery.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_ObjectOperation.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_RectSelect.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation\SuperMap_SwipeInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SceneOperation</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis">
+      <UniqueIdentifier>{4EF17FC0-D2E8-3A1C-895F-CCCF56BA2F6F}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_CalculationTinInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ClipBoxInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ClusterInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ContourMapInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_FacadeInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_FlattenInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_FloodInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_MultiViewShed3DInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ProfileInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ProjectionImageInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_SightlineInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_SkylineInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_SlopeInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ViewDomeInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis\SuperMap_ViewShedInstance.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\SpatialAnalysis</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\Toolkit">
+      <UniqueIdentifier>{2E460D3F-0522-3DE7-B0A1-2BCBB03B2A02}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\Toolkit\SuperMap_DetailsViewInfos.h">
+      <Filter>Plugins\SuperMap HiFi 3D SDK for Unreal\Source\SuperMapSamples\Public\Toolkit</Filter>
+    </ClInclude>
+    <Filter Include="Source\FengxianPlatform">
+      <UniqueIdentifier>{B5626232-AE98-3364-9236-BE4A486CFA05}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\FengxianPlatform\FengxianPlatform.Build.cs">
+      <Filter>Source\FengxianPlatform</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\FengxianPlatform\FengxianPlatform.cpp">
+      <Filter>Source\FengxianPlatform</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FengxianPlatform\FengxianPlatform.h">
+      <Filter>Source\FengxianPlatform</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FengxianPlatform\FengxianPlatformGameModeBase.cpp">
+      <Filter>Source\FengxianPlatform</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FengxianPlatform\FengxianPlatformGameModeBase.h">
+      <Filter>Source\FengxianPlatform</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MtlAnalyzer.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Unreal Engine\Project\FengxianPlatform\Intermediate\Build\Win64\FengxianPlatformEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlAnalyzer\Module.MtlAnalyzer.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlAnalyzer\Module.MtlAnalyzer.gen.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlAnalyzer\Default.rc2.res"
+/OUT:"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlAnalyzer\UnrealEditor-MtlAnalyzer.lib"

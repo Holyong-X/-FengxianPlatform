@@ -1,0 +1,996 @@
+#include "/Engine/Private/VertexFactoryCommon.ush"
+#include "/Engine/Private/LightmapData.ush"
+
+#include "/Engine/Generated/UniformBuffers/PrecomputedLightingBuffer.ush"
+
+int TexCoord0Dim;
+int HasTexMatrixBuffer;
+int ModelType;
+int HasVertexWeight;
+int HasMultiTemporalWeight;
+float4 DecodePositionMin;
+float DecodePositionNormConstant;
+float2 DecodeUV0Min;
+float2 DecodeUV1Min;
+float2 DecodeUV0NormConstant;
+float2 DecodeUV1NormConstant;
+
+#include "/SuperMap/SuperMapCustomVerteFactoryCommon5.ush"
+#include "/SuperMap/InstanceCommon.ush"
+
+
+#if GPUSKIN_PASS_THROUGH
+#include "/Engine/Private/GpuSkinCommon.ush"
+#endif
+
+#include "/Engine/Generated/UniformBuffers/PrecomputedLightingBuffer.ush"
+
+#if USE_INSTANCE_CULLING || USE_INSTANCING
+	#ifndef USE_DITHERED_LOD_TRANSITION_FOR_INSTANCED
+		#error "USE_DITHERED_LOD_TRANSITION_FOR_INSTANCED should have been defined"
+	#endif
+	#define USE_DITHERED_LOD_TRANSITION USE_DITHERED_LOD_TRANSITION_FOR_INSTANCED
+#else
+	#ifndef USE_DITHERED_LOD_TRANSITION_FROM_MATERIAL
+		#error "USE_DITHERED_LOD_TRANSITION_FROM_MATERIAL should have been defined"
+	#endif
+	#define USE_DITHERED_LOD_TRANSITION USE_DITHERED_LOD_TRANSITION_FROM_MATERIAL
+#endif
+
+#if USE_INSTANCE_CULLING || USE_INSTANCING
+	#if USE_DITHERED_LOD_TRANSITION
+		float4 InstancingViewZCompareZero;  // w contains random lod scale 
+		float4 InstancingViewZCompareOne;
+		float4 InstancingViewZConstant;
+		float4 InstancingTranslatedWorldViewOriginZero;
+		float4 InstancingTranslatedWorldViewOriginOne;
+	#endif
+	float4 InstancingFadeOutParams;
+#endif
+
+#if USE_INSTANCING
+float4 InstancingOffset;
+uint InstanceOffset;
+#endif
+
+#ifndef MANUAL_VERTEX_FETCH
+#define MANUAL_VERTEX_FETCH 0
+#endif
+
+#if MANUAL_VERTEX_FETCH
+	#define VF_ColorIndexMask_Index 0
+	#define VF_NumTexcoords_Index 1
+	#define FV_LightMapIndex_Index 2
+	#define VF_VertexOffset 3
+
+	Buffer<float4> VertexFetch_InstanceOriginBuffer;
+	Buffer<float4> VertexFetch_InstanceTransformBuffer;
+	Buffer<float4> VertexFetch_InstanceLightmapBuffer;
+#endif //! MANUAL_VERTEX_FETCH
+
+/**
+ * Per-vertex inputs from bound vertex buffers
+ */
+struct FVertexFactoryInput
+{
+#if MESH_OPT
+	int4	Position	: ATTRIBUTE0;
+	int2	TangentX	: ATTRIBUTE1;
+	int2	TangentZ	: ATTRIBUTE2;
+	half4  VertexColor : ATTRIBUTE3;
+	half4  SecondsColor: ATTRIBUTE4;
+#if TEXTURE_COMPRESS
+	int4	TexCoord0	: ATTRIBUTE5;
+	int4	TexCoord1	: ATTRIBUTE6;
+#else
+	float4    TexCoord0   : ATTRIBUTE5;
+	float4	TexCoord1	: ATTRIBUTE6;
+#endif
+	float2	TexMatrix	: ATTRIBUTE7;
+	float	VertexWeight : ATTRIBUTE8;
+	float2	TilingTexCoord : ATTRIBUTE9;
+#else
+	float4	Position	: ATTRIBUTE0;
+	float3	TangentX	: ATTRIBUTE1;
+	half4	TangentZ	: ATTRIBUTE2;
+	half4  VertexColor : ATTRIBUTE3;
+	half4  SecondsColor: ATTRIBUTE4;
+	float4	TexCoord0	: ATTRIBUTE5;
+	float4	TexCoord1	: ATTRIBUTE6;
+	float2	TexMatrix	: ATTRIBUTE7;
+	float	VertexWeight : ATTRIBUTE8;
+	float2	TilingTexCoord : ATTRIBUTE9;
+#endif
+
+	// Dynamic instancing related attributes with InstanceIdOffset : ATTRIBUTE13
+	VF_GPUSCENE_DECLARE_INPUT_BLOCK(13)
+
+#if (USE_INSTANCING || USE_INSTANCE_CULLING) && !MANUAL_VERTEX_FETCH && (VF_USE_PRIMITIVE_SCENE_DATA != 2)
+	float4 InstanceOrigin : ATTRIBUTE8;  // per-instance random in w 
+	half4 InstanceTransform1 : ATTRIBUTE9;  // hitproxy.r + 256 * selected in .w
+	half4 InstanceTransform2 : ATTRIBUTE10; // hitproxy.g in .w
+	half4 InstanceTransform3 : ATTRIBUTE11; // hitproxy.b in .w
+	float4 InstanceLightmapAndShadowMapUVBias : ATTRIBUTE12; 
+#endif //USE_INSTANCING
+
+	uint InstanceId	: SV_InstanceID;
+	uint VertexId : SV_VertexID;
+
+#if GPUSKIN_PASS_THROUGH && !MANUAL_VERTEX_FETCH
+	float4	PreSkinPosition	: ATTRIBUTE14;
+#endif
+
+#if NEEDS_LIGHTMAP_COORDINATE && !MANUAL_VERTEX_FETCH
+	float2	LightMapCoordinate : ATTRIBUTE15;
+#endif
+};
+
+#if RAYHITGROUPSHADER || COMPUTESHADER
+#if GPUSKIN_PASS_THROUGH
+Buffer<float> GPUSkinCachePositionBuffer;
+#endif
+
+uint GetNumRayTracingDynamicMeshVerticesIndirect()
+{
+	return 0;
+}
+#endif
+
+#if RAYHITGROUPSHADER
+
+FVertexFactoryInput LoadVertexFactoryInputForHGS(uint TriangleIndex, int VertexIndex)
+{
+	FVertexFactoryInput Input = (FVertexFactoryInput)0;
+
+	FTriangleBaseAttributes Tri = LoadTriangleBaseAttributes(TriangleIndex);
+	Input.Position = float4(Tri.LocalPositions[VertexIndex], 1.0f);
+#if VF_USE_PRIMITIVE_SCENE_DATA
+	// Note: GetInstanceUserData() stores the GPU-Scene primitive ID
+	int PrimitiveId = GetInstanceUserData();
+	Input.InstanceIdOffset = PrimitiveId | VF_TREAT_INSTANCE_ID_OFFSET_AS_PRIMITIVE_ID_FLAG;
+	// We have a unified path for both static meshes and instanced static meshes
+	// However due to static meshes being auto-instanced GetBaseInstanceIndex() may not match InstanceIndex() and a non-zero DrawInstanceId is generated
+	// Force DrawInstanceId to 0 when it is a static mesh by checking NumInstanceSceneDataEntries
+	if (GetPrimitiveData(PrimitiveId).NumInstanceSceneDataEntries == 1)
+	{
+		Input.DrawInstanceId = 0;
+	}
+	else
+	{
+		Input.DrawInstanceId = InstanceIndex() - GetBaseInstanceIndex();
+	}
+#endif // VF_USE_PRIMITIVE_SCENE_DATA
+	return Input;
+}
+#endif
+
+
+#if COMPUTESHADER
+
+FVertexFactoryInput LoadVertexFactoryInputForDynamicUpdate(uint TriangleIndex, int VertexIndex, uint PrimitiveId)
+{
+	FVertexFactoryInput Input = (FVertexFactoryInput)0;
+#if VF_USE_PRIMITIVE_SCENE_DATA
+		// GPUCULL_TODO: Makes use of DynamicDraw workaround, should instead refactor VF interfaces and provide the instance ID data directly.
+		Input.InstanceIdOffset = PrimitiveId | VF_TREAT_INSTANCE_ID_OFFSET_AS_PRIMITIVE_ID_FLAG;
+		Input.DrawInstanceId = 0;
+#endif // VF_USE_PRIMITIVE_SCENE_DATA
+
+	return Input;
+}
+
+#endif
+
+/** 
+ * Per-vertex inputs from bound vertex buffers.  Used by passes with a trimmed down position-only shader.
+ */
+struct FPositionOnlyVertexFactoryInput
+{
+#ifdef MESH_OPT
+	int4	Position	: ATTRIBUTE0;
+#else
+	float4	Position	: ATTRIBUTE0;
+#endif
+
+	// Dynamic instancing related attributes with InstanceIdOffset : ATTRIBUTE1
+	VF_GPUSCENE_DECLARE_INPUT_BLOCK(1)
+
+#if (USE_INSTANCING || USE_INSTANCE_CULLING) && !MANUAL_VERTEX_FETCH && (VF_USE_PRIMITIVE_SCENE_DATA != 2)
+	float4 InstanceOrigin : ATTRIBUTE8;  // per-instance random in w 
+	half4 InstanceTransform1 : ATTRIBUTE9;  // hitproxy.r + 256 * selected in .w
+	half4 InstanceTransform2 : ATTRIBUTE10; // hitproxy.g in .w
+	half4 InstanceTransform3 : ATTRIBUTE11; // hitproxy.b in .w
+#endif	// USE_INSTANCING
+
+#if INSTANCE_TYPE
+	float4    TexCoord0   : ATTRIBUTE5;
+#endif // INSTANCE_TYPE
+
+	uint InstanceId : SV_InstanceID;
+	uint VertexId : SV_VertexID;
+
+};
+
+/** 
+ * Per-vertex inputs from bound vertex buffers.  Used by passes with a trimmed down position-and-normal-only shader.
+ */
+struct FPositionAndNormalOnlyVertexFactoryInput
+{
+#ifdef MESH_OPT
+	int4	Position	: ATTRIBUTE0;
+	int2	Normal	    : ATTRIBUTE2;
+#else
+	float4	Position	: ATTRIBUTE0;
+	float4	Normal		: ATTRIBUTE2;
+#endif
+
+#if INSTANCE_TYPE
+	float4    TexCoord0   : ATTRIBUTE5;
+#endif // INSTANCE_TYPE
+
+	// Dynamic instancing related attributes with InstanceIdOffset : ATTRIBUTE1
+	VF_GPUSCENE_DECLARE_INPUT_BLOCK(1)
+
+#if (USE_INSTANCING || USE_INSTANCE_CULLING) && !MANUAL_VERTEX_FETCH && (VF_USE_PRIMITIVE_SCENE_DATA != 2)
+	float4 InstanceOrigin : ATTRIBUTE8;  // per-instance random in w 
+	half4 InstanceTransform1 : ATTRIBUTE9;  // hitproxy.r + 256 * selected in .w
+	half4 InstanceTransform2 : ATTRIBUTE10; // hitproxy.g in .w
+	half4 InstanceTransform3 : ATTRIBUTE11; // hitproxy.b in .w
+#endif	// USE_INSTANCING
+
+	uint InstanceId : SV_InstanceID;
+	uint VertexId : SV_VertexID;
+
+};
+
+/** 
+ * Caches intermediates that would otherwise have to be computed multiple times.  Avoids relying on the compiler to optimize out redundant operations.
+ */
+struct FVertexFactoryIntermediates
+{
+	/** Cached primitive and instance data */
+	FSceneDataIntermediates SceneData;
+#if VF_USE_PRIMITIVE_SCENE_DATA
+	int PrimitiveLocalInstanceIndex;
+#endif
+
+	half3x3 TangentToLocal;
+	half3x3 TangentToWorld;
+	half TangentToWorldSign;
+
+	half4 Color;
+
+#if USE_INSTANCE_CULLING
+	float4 HitProxyId;
+	float PerInstanceRandom;
+	float IsSelected;
+	float IsVisible;
+#endif
+
+#if USE_INSTANCING || (VF_USE_PRIMITIVE_SCENE_DATA == 2)
+	float4 InstanceOrigin;
+	float4 InstanceTransform1;
+	float4 InstanceTransform2;
+	float4 InstanceTransform3;
+#endif
+
+#if USE_INSTANCING || USE_INSTANCE_CULLING
+	float4 InstanceLightmapAndShadowMapUVBias;
+	// x = per-instance random, y = per-instance fade out amount, z = hide/show flag, w dither fade cutoff
+	float4 PerInstanceParams;
+#endif
+
+	float4 Position;
+	float4 TexCoord0;
+	float3 PreSkinPosition;
+};
+
+float3 DecodeNormals(float2 normal)
+{
+	float3 realNormal;
+	realNormal.x = normal.x / 127.0f;
+	realNormal.y = normal.y / 127.0f;
+	realNormal.z = 1.0f - abs(realNormal.x) - abs(realNormal.y);
+	return realNormal;
+}
+
+float3 DecodeTangents(float2 normal)
+{
+	float3 realNormal;
+	realNormal.x = normal.x / 127.0f;
+	realNormal.y = normal.y / 127.0f;
+	realNormal.z = 1.0f - abs(realNormal.x) - abs(realNormal.y);
+	return realNormal;
+}
+
+float4 DecodePosition(float4 pos)
+{
+	return DecodePositionMin + pos * DecodePositionNormConstant;
+}
+
+void DecodeTexCoord0(inout float2 uv)
+{
+	uv.x = uv.x * DecodeUV0NormConstant.x;
+	uv.y = uv.y * DecodeUV0NormConstant.y;
+	uv = DecodeUV0Min + uv;
+}
+
+float4 UGCPosToUE(float4 ugcPos)
+{
+	float4 uePos = ugcPos;
+	uePos.xyz *= 100.0;
+	return uePos.yxzw;
+}
+
+
+#ifdef MESH_OPT
+float4 GetRealInputPosition(int4 inputPosition)
+{
+	float4 v4f;
+	v4f.x = (float)inputPosition.x;
+	v4f.y = (float)inputPosition.y;
+	v4f.z = (float)inputPosition.z;
+	v4f.w = (float)inputPosition.w;
+	float4 decodedPos = DecodePosition(v4f);
+#if INSTANCE_TYPE
+	return decodedPos;
+#else
+	return UGCPosToUE(decodedPos);
+#endif // INSTANCE_TYPE
+}
+#else
+float4 GetRealInputPosition(float4 inputPosition)
+{
+#if INSTANCE_TYPE
+	return inputPosition;
+#else
+	return UGCPosToUE(inputPosition);
+#endif // INSTANCE_TYPE
+}
+#endif // MESH_OPT
+
+#if MESH_OPT && TEXTURE_COMPRESS
+float4 GetRealInputTexCoord0(int4 inputTexCoord)
+{
+	float4 v4f;
+	v4f.x = (float)inputTexCoord.x;
+	v4f.y = (float)inputTexCoord.y;
+	v4f.z = (float)inputTexCoord.z;
+	v4f.w = (float)inputTexCoord.w;
+	DecodeTexCoord0(v4f.xy);
+	v4f.y = 1.0 - v4f.y;
+	return v4f;
+}
+#else
+float4 GetRealInputTexCoord0(float4 inputTexCoord)
+{
+	inputTexCoord.y = 1.0 - inputTexCoord.y;
+	return inputTexCoord;
+}
+#endif // MESH_OPT
+
+#ifdef MESH_OPT
+float3 GetRealInputTangentX(int2 inputTangetX)
+{
+	float2 v2f;
+	v2f.x = (float)inputTangetX.x;
+	v2f.y = (float)inputTangetX.y;
+	return DecodeTangents(v2f.xy).yxz;
+}
+#else
+float3 GetRealInputTangentX(float3 inputTangetX)
+{
+	return inputTangetX.yxz;
+}
+#endif // MESH_OPT
+
+#ifdef MESH_OPT
+float3 GetRealInputTangentZ(int2 inputTangetZ)
+{
+	float2 v2f;
+	v2f.x = (float)inputTangetZ.x;
+	v2f.y = (float)inputTangetZ.y;
+	return DecodeNormals(v2f.xy).yxz;
+}
+#else
+half4 GetRealInputTangentZ(half4 inputTangetZ)
+{
+	#if INSTANCE_TYPE == PIPE_INSTANCE
+		return inputTangetZ.xyzw;
+	#else
+		return inputTangetZ.yxzw;
+	#endif // INSTANCE_TYPE == PIPE_INSTANCE
+}
+#endif // MESH_OPT
+
+FPrimitiveSceneData GetPrimitiveData(FVertexFactoryIntermediates Intermediates)
+{
+	return Intermediates.SceneData.Primitive;
+}
+
+FInstanceSceneData GetInstanceData(FVertexFactoryIntermediates Intermediates)
+{
+	return Intermediates.SceneData.InstanceData;
+}
+
+#if USE_INSTANCE_CULLING
+
+float2 GetInstanceShadowMapBias(FVertexFactoryIntermediates Intermediates)
+{
+	// GPUCULL_TODO: This data is not yet pushed to GPU-Scene for non-nanite instances.
+	//return GetInstanceData(Intermediates).LightMapAndShadowMapUVBias.zw;
+	return Intermediates.InstanceLightmapAndShadowMapUVBias.zw;
+}
+
+float2 GetInstanceLightMapBias(FVertexFactoryIntermediates Intermediates)
+{
+	// GPUCULL_TODO: This data is not yet pushed to GPU-Scene for non-nanite instances.
+	//return GetInstanceData(Intermediates).LightMapAndShadowMapUVBias.xy;
+	return Intermediates.InstanceLightmapAndShadowMapUVBias.xy;
+}
+
+#endif	// USE_INSTANCE_CULLING
+
+/** Converts from vertex factory specific interpolants to a FMaterialPixelParameters, which is used by material inputs. */
+FMaterialPixelParameters GetMaterialPixelParameters(FVertexFactoryInterpolantsVSToPS Interpolants, float4 SvPosition)
+{
+	// GetMaterialPixelParameters is responsible for fully initializing the result
+	FMaterialPixelParameters Result = MakeInitializedMaterialPixelParameters();
+
+#if NUM_TEX_COORD_INTERPOLATORS
+	UNROLL
+	for( int CoordinateIndex = 0; CoordinateIndex < NUM_TEX_COORD_INTERPOLATORS; CoordinateIndex++ )
+	{
+		Result.TexCoords[CoordinateIndex] = GetUV(Interpolants, CoordinateIndex);
+	}
+#endif
+
+#if USE_PARTICLE_SUBUVS
+	// Output TexCoord0 for when previewing materials that use ParticleSubUV.
+	Result.Particle.SubUVCoords[0] = GetUV(Interpolants, 0);
+	Result.Particle.SubUVCoords[1] = GetUV(Interpolants, 0);
+#endif	// USE_PARTICLE_SUBUVS
+
+	half3 TangentToWorld0 = GetTangentToWorld0(Interpolants).xyz;
+	half4 TangentToWorld2 = GetTangentToWorld2(Interpolants);
+	Result.UnMirrored = TangentToWorld2.w;
+
+	Result.VertexColor = GetColor(Interpolants);
+
+	// Required for previewing materials that use ParticleColor
+	Result.Particle.Color = half4(1,1,1,1);
+#if USE_INSTANCING || USE_INSTANCE_CULLING 
+	Result.PerInstanceParams = Interpolants.PerInstanceParams;
+#endif
+
+	Result.TangentToWorld = AssembleTangentToWorld( TangentToWorld0, TangentToWorld2 );
+#if USE_WORLDVERTEXNORMAL_CENTER_INTERPOLATION
+	Result.WorldVertexNormal_Center = Interpolants.TangentToWorld2_Center.xyz;
+#endif
+
+#if LIGHTMAP_UV_ACCESS
+#if NEEDS_LIGHTMAP_COORDINATE
+	#if (ES3_1_PROFILE)
+		// Not supported in pixel shader
+		Result.LightmapUVs = float2(0, 0);
+	#else
+		Result.LightmapUVs = Interpolants.LightMapCoordinate.xy;
+	#endif	// ES3_1_PROFILE
+#endif	// NEEDS_LIGHTMAP_COORDINATE
+#endif	// LIGHTMAP_UV_ACCESS
+
+	Result.TwoSidedSign = 1;
+	Result.PrimitiveId = GetPrimitiveId(Interpolants);
+
+#if HAS_INSTANCE_LOCAL_TO_WORLD_PS
+	Result.InstanceLocalToWorld = GetInstanceLocalToWorld(Interpolants);
+#endif
+#if HAS_INSTANCE_WORLD_TO_LOCAL_PS
+	Result.InstanceWorldToLocal = GetInstanceWorldToLocal(Interpolants);
+#endif
+
+#if NEEDS_PARTICLE_LOCAL_TO_WORLD
+	Result.Particle.ParticleToWorld = GetPrimitiveData(Result.PrimitiveId).LocalToWorld;
+#endif
+
+#if NEEDS_PARTICLE_WORLD_TO_LOCAL
+	Result.Particle.WorldToParticle = GetPrimitiveData(Result.PrimitiveId).WorldToLocal;
+#endif
+
+	return Result;
+}
+
+half3x3 CalcTangentToWorldNoScale(FVertexFactoryIntermediates Intermediates, half3x3 TangentToLocal)
+{
+	half3x3 LocalToWorld = LWCToFloat3x3(GetInstanceData(Intermediates).LocalToWorld);
+	half3 InvScale = GetInstanceData(Intermediates).InvNonUniformScale;
+	LocalToWorld[0] *= InvScale.x;
+	LocalToWorld[1] *= InvScale.y;
+	LocalToWorld[2] *= InvScale.z;
+	return mul(TangentToLocal, LocalToWorld); 
+}
+
+/** Converts from vertex factory specific input to a FMaterialVertexParameters, which is used by vertex shader material inputs. */
+FMaterialVertexParameters GetMaterialVertexParameters(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, float3 WorldPosition, half3x3 TangentToLocal)
+{
+	FMaterialVertexParameters Result = (FMaterialVertexParameters)0;
+	Result.SceneData = Intermediates.SceneData;
+	// FIXME: just for compatibility with assets that use custom HLSL expressions, will be removed once we fix up all these assets
+	Result.PrimitiveId = Intermediates.SceneData.PrimitiveId;
+
+	Result.WorldPosition = WorldPosition;
+	Result.VertexColor = Intermediates.Color;
+
+	// does not handle instancing!
+	Result.TangentToWorld = Intermediates.TangentToWorld;
+
+	Result.PrevFrameLocalToWorld = GetInstanceData(Intermediates).PrevLocalToWorld;
+	#if USE_INSTANCE_CULLING
+		Result.InstanceLocalPosition =  GetRealInputPosition(Input.Position).xyz;
+		Result.InstanceLocalToWorld = GetInstanceData(Intermediates).LocalToWorld;
+		Result.InstanceWorldToLocal = GetInstanceData(Intermediates).WorldToLocal;
+		Result.PerInstanceParams = Intermediates.PerInstanceParams;
+	#endif
+	#if USES_PER_INSTANCE_CUSTOM_DATA
+		Result.CustomDataOffset = Intermediates.SceneData.InstanceData.CustomDataOffset;
+		Result.CustomDataCount = Intermediates.SceneData.InstanceData.CustomDataCount;
+	#endif
+
+	Result.PreSkinnedPosition = Intermediates.PreSkinPosition.xyz;
+	Result.PreSkinnedNormal = TangentToLocal[2]; //TangentBias(Input.TangentZ.xyz);
+
+#if NUM_MATERIAL_TEXCOORDS_VERTEX
+	#if NUM_MATERIAL_TEXCOORDS_VERTEX > 0
+		Result.TexCoords[0] = Intermediates.TexCoord0.xy;;
+	#endif
+	#if NUM_MATERIAL_TEXCOORDS_VERTEX > 1
+		if(HasTexMatrixBuffer > 0)
+		{
+			Result.TexCoords[1].x = Input.TexMatrix.x;
+		}
+		else
+		{
+			Result.TexCoords[1].x = Intermediates.TexCoord0.z;
+		}
+		Result.TexCoords[1].y = 0.0;
+	#endif
+
+	#if NUM_MATERIAL_TEXCOORDS_VERTEX > 3
+		// swap r and b for ugc color
+		#if INSTANCE_TYPE
+			half4 secondsColor = GetInstanceSecondColor(Input.InstanceId);
+		#else
+			half4 secondsColor = Input.SecondsColor.bgra;
+		#endif // INSTANCE_TYPE
+		Result.TexCoords[2] = secondsColor.rg;
+		Result.TexCoords[3] = secondsColor.ba;
+	#endif
+	#if NUM_MATERIAL_TEXCOORDS_VERTEX > 4
+		if(HasVertexWeight > 0)
+		{
+			Result.TexCoords[4].x = Input.VertexWeight * 100;
+			Result.TexCoords[4].y = Input.VertexWeight * 100;
+		}
+		else
+		{
+			Result.TexCoords[4].x = Input.Position.w * 100;
+			Result.TexCoords[4].y = Input.Position.w * 100;
+		}
+	#endif
+	#if NUM_MATERIAL_TEXCOORDS_VERTEX > 5
+		Result.TexCoords[5] = Input.TilingTexCoord.xy;
+	#endif
+#endif  // NUM_MATERIAL_TEXCOORDS_VERTEX
+
+	Result.Particle.Color = half4(1,1,1,1);
+
+#if NEEDS_PARTICLE_LOCAL_TO_WORLD
+	Result.Particle.ParticleToWorld = GetPrimitiveData(Intermediates).LocalToWorld;
+#endif
+
+#if NEEDS_PARTICLE_WORLD_TO_LOCAL
+	Result.Particle.WorldToParticle = GetPrimitiveData(Intermediates).WorldToLocal;
+#endif
+
+#if ENABLE_NEW_HLSL_GENERATOR
+	EvaluateVertexMaterialAttributes(Result);
+#endif
+	return Result;
+}
+
+
+#if INSTANCE_TYPE
+float4 CalcWorldPosition(uint inputInstanceId,  float4 texcoord0, float4 Position, FLWCMatrix LocalToWorld)
+{	
+	float4x4 instanceLocalMatrix = GetInstanceLocalMatrix(inputInstanceId, texcoord0);
+	float4 tempPos = float4(Position.xyz, 1.0);
+	tempPos = mul(tempPos, instanceLocalMatrix);
+	float4 localPosition = UGCPosToUE(tempPos);
+	return TransformLocalToTranslatedWorld(localPosition.xyz, LocalToWorld);
+}
+#else
+float4 CalcWorldPosition(float4 Position, FLWCMatrix LocalToWorld)
+{
+	return TransformLocalToTranslatedWorld(Position.xyz, LocalToWorld);
+}
+#endif // INSTANCE_TYPE
+
+half3x3 CalcTangentToLocal(FVertexFactoryInput Input, inout float TangentSign)
+{
+	half3 TangentInputX = GetRealInputTangentX(Input.TangentX);
+	half4 TangentInputZ;
+	TangentInputZ.xyz = GetRealInputTangentZ(Input.TangentZ);
+	#if INSTANCE_TYPE == PIPE_INSTANCE
+		TangentInputZ.xyz = GetInstanceLocalTangentZ(Input.InstanceId, TangentInputZ.xyz, Input.TexCoord0);
+	#endif // INSTANCE_TYPE == PIPE_INSTANCE
+	TangentInputZ.w = 1.0;
+	half3 TangentX = TangentBias(TangentInputX);
+	half4 TangentZ = TangentBias(TangentInputZ);
+
+	TangentSign = TangentZ.w;
+
+	// derive the binormal by getting the cross product of the normal and tangent
+	half3 TangentY = cross(TangentZ.xyz, TangentX) * TangentZ.w;
+	
+	// Recalculate TangentX off of the other two vectors
+	// This corrects quantization error since TangentX was passed in as a quantized vertex input
+	// The error shows up most in specular off of a mesh with a smoothed UV seam (normal is smooth, but tangents vary across the seam)
+	half3x3 Result;
+	Result[0] = cross(TangentY, TangentZ.xyz) * TangentZ.w;
+	Result[1] = TangentY;
+	Result[2] = TangentZ.xyz;
+
+	return Result;
+}
+
+half3x3 CalcTangentToWorld(FVertexFactoryIntermediates Intermediates, half3x3 TangentToLocal)
+{
+	half3x3 TangentToWorld = CalcTangentToWorldNoScale(Intermediates, TangentToLocal);
+	return TangentToWorld;
+}
+
+FVertexFactoryIntermediates GetVertexFactoryIntermediates(FVertexFactoryInput Input)
+{
+	FVertexFactoryIntermediates Intermediates = (FVertexFactoryIntermediates)0;
+	Intermediates.SceneData = VF_GPUSCENE_GET_INTERMEDIATES(Input);
+
+#if VF_USE_PRIMITIVE_SCENE_DATA
+	// Calculate the local (within the range of instance IDs belonging to a given primitive), as this can be used to load custom stuff
+	Intermediates.PrimitiveLocalInstanceIndex = Intermediates.SceneData.InstanceId - GetPrimitiveData(Intermediates).InstanceSceneDataOffset;
+
+#if USE_INSTANCE_CULLING
+	Intermediates.InstanceLightmapAndShadowMapUVBias = Intermediates.SceneData.InstanceData.LightMapAndShadowMapUVBias;
+	Intermediates.PerInstanceRandom = Intermediates.SceneData.InstanceData.RandomID;
+#if USE_EDITOR_SHADERS
+	Intermediates.IsSelected = Intermediates.SceneData.InstanceData.EditorData.bIsSelected ? 1.0f : 0.0f;
+	Intermediates.HitProxyId = float4(Intermediates.SceneData.InstanceData.EditorData.HitProxyId, 0.0f);
+#else // !USE_EDITOR_SHADERS
+	Intermediates.IsSelected = 0.0f;
+	Intermediates.HitProxyId = float4(0.0f, 0.0f, 0.0f, 0.0f);
+#endif // USE_EDITOR_SHADERS
+
+	{
+		// This repackaging is stupid-seeming but these params are propably packed off to some interpolator or something
+		Intermediates.PerInstanceParams.x = Intermediates.PerInstanceRandom;
+		
+		// PerInstanceParams.y: per-instance fade out amount
+		float3 InstanceTranslatedLocation = TransformLocalToTranslatedWorld(GetInstanceData(Intermediates).LocalBoundsCenter, GetInstanceData(Intermediates).LocalToWorld);
+		Intermediates.PerInstanceParams.y = 1.0 - saturate((length(InstanceTranslatedLocation) - InstancingFadeOutParams.x) * InstancingFadeOutParams.y);
+		
+		// InstancingFadeOutParams.z,w are RenderSelected and RenderDeselected respectively.
+
+		// PerInstanceParams.z = hide / show flag, 
+		Intermediates.IsVisible = lerp(InstancingFadeOutParams.w, InstancingFadeOutParams.z, Intermediates.IsSelected);
+		Intermediates.PerInstanceParams.z = Intermediates.IsVisible;
+
+		// PerInstanceParams.w dither fade cutoff
+	#if USE_DITHERED_LOD_TRANSITION
+		float RandomLOD = InstancingViewZCompareZero.w * Intermediates.PerInstanceParams.x;
+		float ViewZZero = length(InstanceTranslatedLocation - InstancingTranslatedWorldViewOriginZero.xyz) + RandomLOD;
+		float ViewZOne = length(InstanceTranslatedLocation - InstancingTranslatedWorldViewOriginOne.xyz) + RandomLOD;
+		Intermediates.PerInstanceParams.w =
+			dot(float3(ViewZZero.xxx > InstancingViewZCompareZero.xyz), InstancingViewZConstant.xyz) * InstancingTranslatedWorldViewOriginZero.w +
+			dot(float3(ViewZOne.xxx > InstancingViewZCompareOne.xyz), InstancingViewZConstant.xyz) * InstancingTranslatedWorldViewOriginOne.w;
+		Intermediates.PerInstanceParams.z *= abs(Intermediates.PerInstanceParams.w) < .999;
+		Intermediates.IsVisible = Intermediates.PerInstanceParams.z;
+	#else
+		Intermediates.PerInstanceParams.w = 0;
+	#endif
+	}
+#endif // USE_INSTANCE_CULLING
+#endif // VF_USE_PRIMITIVE_SCENE_DATA
+
+#if INSTANCE_TYPE
+	Intermediates.Color = GetInstanceVertexColor(Input.InstanceId); // Swizzle vertex color.
+#else
+	Intermediates.Color = Input.VertexColor FCOLOR_COMPONENT_SWIZZLE; // Swizzle vertex color.
+#endif // INSTANCE_TYPE
+	// swap r and b for ugc color
+	Intermediates.Color = Intermediates.Color.bgra;
+
+	float TangentSign = 1.0;
+	Intermediates.TangentToLocal = CalcTangentToLocal(Input, TangentSign);
+	Intermediates.TangentToWorld = CalcTangentToWorld(Intermediates, Intermediates.TangentToLocal);
+	Intermediates.TangentToWorldSign = TangentSign * GetInstanceData(Intermediates).DeterminantSign;
+
+	float dH = 0.0;
+	if(HasMultiTemporalWeight > 0)
+	{
+		dH = Input.VertexWeight * 100.0;
+	}
+
+	Intermediates.Position = GetRealInputPosition(Input.Position);
+	Intermediates.Position.z+= dH;
+	Intermediates.PreSkinPosition = GetRealInputPosition(Intermediates.Position);
+
+	Intermediates.TexCoord0 = GetRealInputTexCoord0(Input.TexCoord0);
+
+	return Intermediates;
+}
+
+/**
+* Get the 3x3 tangent basis vectors for this vertex factory
+* this vertex factory will calculate the binormal on-the-fly
+*
+* @param Input - vertex input stream structure
+* @return 3x3 matrix
+*/
+half3x3 VertexFactoryGetTangentToLocal( FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates )
+{
+	return Intermediates.TangentToLocal;
+}
+
+// @return translated world position
+float4 VertexFactoryGetWorldPosition(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+	FLWCMatrix LocalToWorld = GetInstanceData(Intermediates).LocalToWorld;
+	float4 Position = GetRealInputPosition(Input.Position);
+#if INSTANCE_TYPE
+	return CalcWorldPosition(Input.InstanceId, Input.TexCoord0, Position, LocalToWorld);
+#else
+	return CalcWorldPosition(Position, LocalToWorld);
+#endif // INSTANCE_TYPE
+}
+
+float4 VertexFactoryGetRasterizedWorldPosition(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, float4 InWorldPosition)
+{
+	return InWorldPosition;
+}
+
+float3 VertexFactoryGetPositionForVertexLighting(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, float3 TranslatedWorldPosition)
+{
+	return TranslatedWorldPosition;
+}
+
+FVertexFactoryInterpolantsVSToPS VertexFactoryGetInterpolantsVSToPS(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, FMaterialVertexParameters VertexParameters)
+{
+	FVertexFactoryInterpolantsVSToPS Interpolants;
+
+	// Initialize the whole struct to 0
+	// Really only the last two components of the packed UVs have the opportunity to be uninitialized
+	Interpolants = (FVertexFactoryInterpolantsVSToPS)0;
+
+#if NUM_TEX_COORD_INTERPOLATORS
+	float2 CustomizedUVs[NUM_TEX_COORD_INTERPOLATORS];
+	GetMaterialCustomizedUVs(VertexParameters, CustomizedUVs);
+	GetCustomInterpolators(VertexParameters, CustomizedUVs);
+	
+	UNROLL
+	for (int CoordinateIndex = 0; CoordinateIndex < NUM_TEX_COORD_INTERPOLATORS; CoordinateIndex++)
+	{
+		SetUV(Interpolants, CoordinateIndex, CustomizedUVs[CoordinateIndex]);
+	}
+
+#elif NUM_MATERIAL_TEXCOORDS_VERTEX == 0 && USE_PARTICLE_SUBUVS
+	#if MANUAL_VERTEX_FETCH
+		SetUV(Interpolants, 0, LocalVF.VertexFetch_TexCoordBuffer[LocalVF.VertexFetch_Parameters[VF_NumTexcoords_Index] * (LocalVF.VertexFetch_Parameters[VF_VertexOffset] + Input.VertexId)]);
+	#else
+		SetUV(Interpolants, 0, Input.TexCoords0);
+	#endif
+#endif
+
+#if NEEDS_LIGHTMAP_COORDINATE
+	float2 LightMapCoordinate = 0;
+	float2 ShadowMapCoordinate = 0;
+	#if MANUAL_VERTEX_FETCH
+		float2 LightMapCoordinateInput = LocalVF.VertexFetch_TexCoordBuffer[LocalVF.VertexFetch_Parameters[VF_NumTexcoords_Index] * (LocalVF.VertexFetch_Parameters[VF_VertexOffset] + Input.VertexId) + LocalVF.VertexFetch_Parameters[FV_LightMapIndex_Index]];
+	#else
+		float2 LightMapCoordinateInput = Input.LightMapCoordinate;
+	#endif
+
+	uint LightmapDataIndex = GetPrimitiveData(Intermediates).LightmapDataIndex + LocalVF.LODLightmapDataIndex;
+	uint LightmapUVIndex = GetPrimitiveData(Intermediates).LightmapUVIndex;
+	float4 LightMapCoordinateScaleBias = VF_GPUSCENE_GET_LIGHTMAP_UV_SCALE_BIAS(Input, LightmapDataIndex);
+
+	#if USE_INSTANCING || USE_INSTANCE_CULLING
+		LightMapCoordinate = LightMapCoordinateInput * LightMapCoordinateScaleBias.xy + GetInstanceLightMapBias(Intermediates);
+	#else
+		LightMapCoordinate = LightMapCoordinateInput * LightMapCoordinateScaleBias.xy + LightMapCoordinateScaleBias.zw;
+	#endif
+	#if STATICLIGHTING_TEXTUREMASK
+		float4 ShadowMapCoordinateScaleBias = VF_GPUSCENE_GET_SHADOWMAP_UV_SCALE_BIAS(Input, LightmapDataIndex);
+
+		#if USE_INSTANCING || USE_INSTANCE_CULLING
+			ShadowMapCoordinate = LightMapCoordinateInput * ShadowMapCoordinateScaleBias.xy + GetInstanceShadowMapBias(Intermediates);
+		#else
+			ShadowMapCoordinate = LightMapCoordinateInput * ShadowMapCoordinateScaleBias.xy + ShadowMapCoordinateScaleBias.zw;
+		#endif
+	#endif	// STATICLIGHTING_TEXTUREMASK
+
+	SetLightMapCoordinate(Interpolants, LightMapCoordinate, ShadowMapCoordinate);
+	SetLightmapDataIndex(Interpolants, LightmapDataIndex);
+#endif	// NEEDS_LIGHTMAP_COORDINATE
+
+	SetTangents(Interpolants, Intermediates.TangentToWorld[0], Intermediates.TangentToWorld[2], Intermediates.TangentToWorldSign);
+	SetColor(Interpolants, Intermediates.Color);
+
+#if USE_INSTANCING || USE_INSTANCE_CULLING
+	Interpolants.PerInstanceParams = Intermediates.PerInstanceParams;
+#endif
+
+#if INSTANCED_STEREO
+	Interpolants.EyeIndex = 0;
+#endif
+
+	SetPrimitiveId(Interpolants, Intermediates.SceneData.PrimitiveId);
+
+#if HAS_INSTANCE_LOCAL_TO_WORLD_PS
+	SetInstanceLocalToWorld(Interpolants, VertexParameters.InstanceLocalToWorld);
+#endif
+#if HAS_INSTANCE_WORLD_TO_LOCAL_PS
+	SetInstanceWorldToLocal(Interpolants, VertexParameters.InstanceWorldToLocal);
+#endif
+
+	return Interpolants;
+}
+
+
+/** X for depth-only pass */
+float4 VertexFactoryGetWorldPosition(FPositionOnlyVertexFactoryInput Input)
+{
+	FSceneDataIntermediates SceneData = VF_GPUSCENE_GET_INTERMEDIATES(Input);
+	FLWCMatrix LocalToWorld = SceneData.InstanceData.LocalToWorld;
+
+	float4 Position = GetRealInputPosition(Input.Position);
+#if INSTANCE_TYPE
+	return CalcWorldPosition(Input.InstanceId, Input.TexCoord0, Position, LocalToWorld);
+#else
+	return CalcWorldPosition(Position, LocalToWorld);
+#endif // INSTANCE_TYPE
+}
+
+/** for depth-only pass (slope depth bias) */
+float4 VertexFactoryGetWorldPosition(FPositionAndNormalOnlyVertexFactoryInput Input)
+{
+	FSceneDataIntermediates SceneData = VF_GPUSCENE_GET_INTERMEDIATES(Input);
+	FLWCMatrix LocalToWorld = SceneData.InstanceData.LocalToWorld;
+
+float4 Position = GetRealInputPosition(Input.Position);
+#if INSTANCE_TYPE
+	return CalcWorldPosition(Input.InstanceId, Input.TexCoord0, Position, LocalToWorld);
+#else
+	return CalcWorldPosition(Position, LocalToWorld);
+#endif // INSTANCE_TYPE
+}
+
+float3 VertexFactoryGetWorldNormal(FPositionAndNormalOnlyVertexFactoryInput Input)
+{
+	FSceneDataIntermediates SceneData = VF_GPUSCENE_GET_INTERMEDIATES(Input);
+	FLWCMatrix LocalToWorld = SceneData.InstanceData.LocalToWorld;
+	float3 InvScale = SceneData.InstanceData.InvNonUniformScale;
+	
+	float3 Normal = GetRealInputTangentZ(Input.Normal).xyz;
+#if INSTANCE_TYPE == PIPE_INSTANCE
+	Normal.xyz = GetInstanceLocalTangentZ(Input.InstanceId, Normal.xyz, Input.TexCoord0);
+#endif // INSTANCE_TYPE == PIPE_INSTANCE
+	return RotateLocalToWorld(Normal, LocalToWorld, InvScale);
+}
+
+float3 VertexFactoryGetWorldNormal(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+	return Intermediates.TangentToWorld[2];
+}
+
+// Information when using pass through to get the previous position, as no matrix is available/needed
+#if GPUSKIN_PASS_THROUGH
+Buffer<float> GPUSkinCachePreviousPositionBuffer;
+#endif
+
+// @return previous translated world position
+float4 VertexFactoryGetPreviousWorldPosition(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+	FLWCMatrix PreviousLocalToWorld = GetInstanceData(Intermediates).PrevLocalToWorld;
+	float4 Position = GetRealInputPosition(Input.Position);
+	return TransformPreviousLocalPositionToTranslatedWorld(Position.xyz, PreviousLocalToWorld);
+}
+
+#if NEEDS_VERTEX_FACTORY_INTERPOLATION
+	struct FVertexFactoryRayTracingInterpolants
+	{
+		FVertexFactoryInterpolantsVSToPS InterpolantsVSToPS;
+	};
+
+	float2 VertexFactoryGetRayTracingTextureCoordinate( FVertexFactoryRayTracingInterpolants Interpolants )
+	{
+	#if NUM_MATERIAL_TEXCOORDS
+		return Interpolants.InterpolantsVSToPS.TexCoords[0].xy;
+	#else // #if NUM_MATERIAL_TEXCOORDS
+		return float2(0,0);
+	#endif // #if NUM_MATERIAL_TEXCOORDS
+	}
+
+	FVertexFactoryInterpolantsVSToPS VertexFactoryAssignInterpolants(FVertexFactoryRayTracingInterpolants Input)
+	{
+		return Input.InterpolantsVSToPS;
+	}
+
+	FVertexFactoryRayTracingInterpolants VertexFactoryGetRayTracingInterpolants(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, FMaterialVertexParameters VertexParameters)
+	{
+		FVertexFactoryRayTracingInterpolants Interpolants;
+		Interpolants.InterpolantsVSToPS = VertexFactoryGetInterpolantsVSToPS(Input, Intermediates, VertexParameters);
+		return Interpolants;
+	}
+
+	FVertexFactoryRayTracingInterpolants VertexFactoryInterpolate(FVertexFactoryRayTracingInterpolants a, float aInterp, FVertexFactoryRayTracingInterpolants b, float bInterp)
+	{
+		// Default initialize. Otherwise, some graphics pipelines that
+		// couple tessellation with geometry shaders won't write to all TEXCOORD semantics,
+		// but read from them when <FVertexFactoryRayTracingInterpolants> is being copied as a whole.
+		FVertexFactoryRayTracingInterpolants O = (FVertexFactoryRayTracingInterpolants)0;
+
+#if VF_USE_PRIMITIVE_SCENE_DATA
+		O.InterpolantsVSToPS.PrimitiveId = a.InterpolantsVSToPS.PrimitiveId;
+    #if NEEDS_LIGHTMAP_COORDINATE
+        O.InterpolantsVSToPS.LightmapDataIndex = a.InterpolantsVSToPS.LightmapDataIndex;
+    #endif
+#endif	
+		// Do we really need to interpolate TangentToWorld2 here? It should be replaced by the
+		// interpolated normal from 'whatever' interpolation scheme we're using
+	
+		INTERPOLATE_MEMBER(InterpolantsVSToPS.TangentToWorld0.xyz);
+		INTERPOLATE_MEMBER(InterpolantsVSToPS.TangentToWorld2);
+	#if INTERPOLATE_VERTEX_COLOR
+		INTERPOLATE_MEMBER(InterpolantsVSToPS.Color);
+	#endif
+	#if USE_INSTANCING || USE_INSTANCE_CULLING
+		INTERPOLATE_MEMBER(InterpolantsVSToPS.PerInstanceParams);
+	#endif
+
+	#if NEEDS_LIGHTMAP_COORDINATE
+		INTERPOLATE_MEMBER(InterpolantsVSToPS.LightMapCoordinate);
+	#endif
+
+	#if NUM_TEX_COORD_INTERPOLATORS
+		UNROLL
+		for(int tc = 0; tc < (NUM_TEX_COORD_INTERPOLATORS+1)/2; ++tc)
+		{
+			INTERPOLATE_MEMBER(InterpolantsVSToPS.TexCoords[tc]);
+		}
+	#elif USE_PARTICLE_SUBUVS
+		INTERPOLATE_MEMBER(InterpolantsVSToPS.TexCoords[0]);
+	#endif
+
+		return O;
+	}
+#endif // #if NEEDS_VERTEX_FACTORY_INTERPOLATION
+
+#if USE_INSTANCE_CULLING
+float4 VertexFactoryGetInstanceHitProxyId(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+	return Intermediates.HitProxyId;
+}
+#endif
+
+float4 VertexFactoryGetTranslatedPrimitiveVolumeBounds(FVertexFactoryInterpolantsVSToPS Interpolants)
+{
+	FPrimitiveSceneData PrimitiveData = GetPrimitiveData(GetPrimitiveId(Interpolants));
+	return float4(LWCToFloat(LWCAdd(PrimitiveData.ObjectWorldPosition, ResolvedView.PreViewTranslation)), PrimitiveData.ObjectRadius);
+}
+
+uint VertexFactoryGetPrimitiveId(FVertexFactoryInterpolantsVSToPS Interpolants)
+{
+	return GetPrimitiveId(Interpolants);
+}
+
+#include "/Engine/Private/VertexFactoryDefaultInterface.ush"
+

@@ -1,0 +1,16 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-SuperMap.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Unreal Engine\Project\FengxianPlatform\Intermediate\Build\Win64\FengxianPlatformEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\Module.SuperMap.1_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\Module.SuperMap.2_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\Module.SuperMap.3_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\Module.SuperMap.4_of_4.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\Module.SuperMap.gen.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\Default.rc2.res"
+/OUT:"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\SuperMap\UnrealEditor-SuperMap.lib"

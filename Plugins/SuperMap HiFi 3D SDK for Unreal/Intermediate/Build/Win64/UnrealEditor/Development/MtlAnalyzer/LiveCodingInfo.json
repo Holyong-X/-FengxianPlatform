@@ -1,0 +1,13 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MtlAnalyzer.cpp.obj": [
+			"MtlAnalyzer.cpp.obj",
+			"MtlAnalyzerModule.cpp.obj"
+		],
+		"Module.MtlAnalyzer.gen.cpp.obj": [
+			"MtlAnalyzer.gen.cpp.obj",
+			"MtlAnalyzer.init.gen.cpp.obj"
+		]
+	}
+}

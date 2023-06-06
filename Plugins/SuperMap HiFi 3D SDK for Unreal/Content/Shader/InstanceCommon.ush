@@ -1,0 +1,144 @@
+#define MODEL_INSTANCE 1
+#define PIPE_INSTANCE 2
+
+#if INSTANCE_TYPE
+
+#if INSTANCE_TYPE == MODEL_INSTANCE
+
+	#define INSTANCE_STRIDE 17
+
+	float4 GetInstanceSecondColor(uint inputInstanceId)
+	{
+		uint InstanceId = GetInstanceId(inputInstanceId);
+		float secondColor = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 16];
+		uint uColor = asuint(secondColor);
+		float4 vColor;
+		vColor.r = float( ( uColor & 0x000000ff ) ) / 255.0;
+		vColor.g = float( ( uColor & 0x0000ff00 ) >> 8  ) / 255.0;
+		vColor.b = float( ( uColor & 0x00ff0000 ) >> 16 ) / 255.0;
+		vColor.a = float( ( uColor & 0xff000000 ) >> 24 ) / 255.0;
+		return vColor;
+	}
+
+	float4x4 GetInstanceLocalMatrix(uint inputInstanceId, float4 texcoord0)
+	{
+		uint InstanceId = GetInstanceId(inputInstanceId);
+		float m00 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 0];
+		float m10 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 1];
+		float m20 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 2];
+		float m30 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 3];
+
+		float m01 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 4];
+		float m11 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 5];
+		float m21 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 6];
+		float m31 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 7];
+
+		float m02 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 8];
+		float m12 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 9];
+		float m22 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 10];
+		float m32 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 11];
+
+		float4x4 instanceLocalMatrix;
+		instanceLocalMatrix[0] = float4(m00, m01, m02, 0);
+		instanceLocalMatrix[1] = float4(m10, m11, m12, 0);
+		instanceLocalMatrix[2] = float4(m20, m21, m22, 0);
+		instanceLocalMatrix[3] = float4(m30, m31, m32, 1);
+		return instanceLocalMatrix;
+	}
+#elif INSTANCE_TYPE == PIPE_INSTANCE
+
+	#define INSTANCE_STRIDE 29
+
+	float4 GetInstanceSecondColor(uint inputInstanceId)
+	{
+		uint InstanceId = GetInstanceId(inputInstanceId);
+		float secondColor = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 28];
+		uint uColor = asuint(secondColor);
+		float4 vColor;
+		vColor.r = float( ( uColor & 0x000000ff ) ) / 255.0;
+		vColor.g = float( ( uColor & 0x0000ff00 ) >> 8  ) / 255.0;
+		vColor.b = float( ( uColor & 0x00ff0000 ) >> 16 ) / 255.0;
+		vColor.a = float( ( uColor & 0xff000000 ) >> 24 ) / 255.0;
+		return vColor;
+	}
+
+	float4x4 GetInstanceLocalMatrix(uint inputInstanceId, float4 texcoord0)
+	{
+		uint InstanceId = GetInstanceId(inputInstanceId);
+
+		uint nMatrixOffset = 0;
+		if(texcoord0.y > 0.5)
+		{
+			nMatrixOffset = 12;
+		}
+		else
+		{
+			nMatrixOffset = 0;
+		}
+		float m00 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset];
+		float m10 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 1];
+		float m20 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 2];
+		float m30 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 3];
+
+		float m01 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 4];
+		float m11 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 5];
+		float m21 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 6];
+		float m31 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 7];
+
+		float m02 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 8];
+		float m12 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 9];
+		float m22 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 10];
+		float m32 = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + nMatrixOffset + 11];
+
+		float4x4 instanceLocalMatrix;
+		instanceLocalMatrix[0] = float4(m00, m01, m02, 0);
+		instanceLocalMatrix[1] = float4(m10, m11, m12, 0);
+		instanceLocalMatrix[2] = float4(m20, m21, m22, 0);
+		instanceLocalMatrix[3] = float4(m30, m31, m32, 1);
+		return instanceLocalMatrix;
+	}
+
+
+	float3 GetInstanceLocalTangentZ(uint inputInstanceId, float3 inputTangetZ, float4 texcoord0)
+	{
+		float4x4 localMatrix = GetInstanceLocalMatrix(inputInstanceId, texcoord0);
+		uint InstanceId = GetInstanceId(inputInstanceId);
+		float normalScalar = CustomMeshVF.VertexFetch_InstanceBuffer[InstanceId * INSTANCE_STRIDE + 26];
+		float3 result = inputTangetZ;
+		result.x *= normalScalar;
+		result = mul(result, (float3x3)localMatrix);
+		result = normalize(result);
+		return result;
+	}
+
+	float4 GetInstanceTexCoord(uint inputInstanceId, float4 texcoord0)
+	{
+		if(texcoord0.y > 0.5)
+		{
+			float uvX = CustomMeshVF.VertexFetch_InstanceBuffer[inputInstanceId * INSTANCE_STRIDE + 25];
+			return float4(uvX, texcoord0.x, 0.0, 1.0);
+		}
+		else
+		{
+			float uvX = CustomMeshVF.VertexFetch_InstanceBuffer[inputInstanceId * INSTANCE_STRIDE + 24];
+			return float4(uvX, texcoord0.x, 0.0, 1.0);
+		}
+	}
+
+	#endif // INSTANCE_TYPE == PIPE_INSTANCE
+
+float4 GetInstanceVertexColor(uint inputInstanceId)
+{
+	uint InstanceId = GetInstanceId(inputInstanceId);
+	float vertexColor = CustomMeshVF.VertexFetch_InstanceColorBuffer[InstanceId];
+	uint uColor = asuint(vertexColor);
+	float4 vColor;
+	vColor.r = float( ( uColor & 0x000000ff ) ) / 255.0;
+	vColor.g = float( ( uColor & 0x0000ff00 ) >> 8  ) / 255.0;
+	vColor.b = float( ( uColor & 0x00ff0000 ) >> 16 ) / 255.0;
+	vColor.a = float( ( uColor & 0xff000000 ) >> 24 ) / 255.0;
+	return vColor;
+}
+
+
+#endif // INSTANCE_TYPE

@@ -1,0 +1,12 @@
+{
+	"SourceFiles": [
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Source\\FengxianPlatform\\FengxianPlatform.Build.cs",
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Plugins\\SuperMap HiFi 3D SDK for Unreal\\Source\\MtlAnalyzer\\MtlAnalyzer.Build.cs",
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Plugins\\SuperMap HiFi 3D SDK for Unreal\\Source\\MtlBaking\\MtlBaking.Build.cs",
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Plugins\\SuperMap HiFi 3D SDK for Unreal\\Source\\SuperMap\\SuperMap.Build.cs",
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Plugins\\SuperMap HiFi 3D SDK for Unreal\\Source\\SuperMapSamples\\SuperMapSamples.Build.cs",
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Source\\FengxianPlatform.Target.cs",
+		"E:\\Unreal Engine\\Project\\FengxianPlatform\\Source\\FengxianPlatformEditor.Target.cs"
+	],
+	"EngineVersion": "5.0.3"
+}

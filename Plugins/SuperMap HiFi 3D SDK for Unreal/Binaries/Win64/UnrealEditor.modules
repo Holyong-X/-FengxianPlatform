@@ -1,0 +1,10 @@
+{
+	"BuildId": "19505902",
+	"Modules": 
+	{
+		"MtlAnalyzer": "UnrealEditor-MtlAnalyzer.dll",
+		"MtlBaking": "UnrealEditor-MtlBaking.dll",
+		"SuperMap": "UnrealEditor-SuperMap.dll",
+		"SuperMapSamples": "UnrealEditor-SuperMapSamples.dll"
+	}
+}

@@ -1,0 +1,30 @@
+#include "/Engine/Public/Platform.ush"
+#include "/Engine/Private/Common.ush"
+
+
+float4 colorVal;
+float4 transform;
+
+void MainVS(
+	in float4 InPosition: ATTRIBUTE0,
+	in float4 InColor : ATTRIBUTE1,
+	out float4 OutColor : COLOR0,
+	out float4 OutPosition : SV_POSITION
+)
+{
+	OutPosition.x = 2.0 * (InPosition.x - transform.x) / (transform.z);
+	OutPosition.y = 2.0 * (InPosition.y - transform.y) / (transform.w);
+	OutPosition.z = 0.0;
+	OutPosition.w = 1.0;
+
+	OutColor = InColor;
+}
+
+void MainPS(
+in float4 VertexColor : COLOR0,
+in float4 Position: SV_POSITION,
+out float4 OutColor : SV_Target0
+)
+{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+	OutColor = VertexColor.bgra;
+}

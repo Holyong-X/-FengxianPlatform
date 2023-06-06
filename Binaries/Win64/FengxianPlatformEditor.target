@@ -24131,6 +24131,10 @@
 			"Type": "NonUFS"
 		},
 		{
+			"Path": "$(ProjectDir)/Plugins/SuperMap HiFi 3D SDK for Unreal/Source/ThirdParty/SuperMapLibrary/Win64/log/iObjects.2023.06.06.log",
+			"Type": "NonUFS"
+		},
+		{
 			"Path": "$(ProjectDir)/Plugins/SuperMap HiFi 3D SDK for Unreal/Source/ThirdParty/SuperMapLibrary/Win64/lti_dsdk_9.5.dll",
 			"Type": "NonUFS"
 		},

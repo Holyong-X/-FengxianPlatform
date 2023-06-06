@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "FengxianPlatform",
+			"Path": "E:\\Unreal Engine\\Project\\FengxianPlatform\\Source\\FengxianPlatform.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "FengxianPlatformEditor",
+			"Path": "E:\\Unreal Engine\\Project\\FengxianPlatform\\Source\\FengxianPlatformEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

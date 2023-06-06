@@ -1,0 +1,670 @@
+#include "/Engine/Private/VertexFactoryCommon.ush"
+#include "/Engine/Private/LightmapData.ush"
+
+#include "/Engine/Generated/UniformBuffers/PrecomputedLightingBuffer.ush"
+
+int TexCoord0Dim;
+int HasTexMatrixBuffer;
+int ModelType;
+int HasVertexWeight;
+int HasMultiTemporalWeight;
+float4 DecodePositionMin;
+float DecodePositionNormConstant;
+float2 DecodeUV0Min;
+float2 DecodeUV1Min;
+float2 DecodeUV0NormConstant;
+float2 DecodeUV1NormConstant;
+
+#include "/SuperMap/SuperMapCustomVerteFactoryCommon4.ush"
+#include "/SuperMap/InstanceCommon.ush"
+
+/**
+ * Vertex attributes to fetch.
+ */
+struct FVertexFactoryInput
+{
+#if MESH_OPT
+	int4	Position	: ATTRIBUTE0;
+	int2	TangentX	: ATTRIBUTE1;
+	int2	TangentZ	: ATTRIBUTE2;
+	half4  VertexColor : ATTRIBUTE3;
+	half4  SecondsColor: ATTRIBUTE4;
+#if TEXTURE_COMPRESS
+	int4	TexCoord0	: ATTRIBUTE5;
+	int4	TexCoord1	: ATTRIBUTE6;
+#else
+	float4    TexCoord0   : ATTRIBUTE5;
+	float4	TexCoord1	: ATTRIBUTE6;
+#endif
+	float2	TexMatrix	: ATTRIBUTE7;
+	float	VertexWeight : ATTRIBUTE8;
+	float2	TilingTexCoord : ATTRIBUTE9;
+#else
+	float4	Position	: ATTRIBUTE0;
+	float3	TangentX	: ATTRIBUTE1;
+	half4	TangentZ	: ATTRIBUTE2;
+	half4  VertexColor : ATTRIBUTE3;
+	half4  SecondsColor: ATTRIBUTE4;
+	float4	TexCoord0	: ATTRIBUTE5;
+	float4	TexCoord1	: ATTRIBUTE6;
+	float2	TexMatrix	: ATTRIBUTE7;
+	float	VertexWeight : ATTRIBUTE8;
+	float2	TilingTexCoord : ATTRIBUTE9;
+#endif
+
+#if NEEDS_LIGHTMAP_COORDINATE && !MANUAL_VERTEX_FETCH
+	float2	LightMapCoordinate : ATTRIBUTE15;
+#endif
+
+	uint InstanceId	: SV_InstanceID;
+	uint VertexId : SV_VertexID;
+};
+
+struct FPositionOnlyVertexFactoryInput
+{
+#ifdef MESH_OPT
+	int4	Position	: ATTRIBUTE0;
+#else
+	float4	Position	: ATTRIBUTE0;
+#endif
+
+#if INSTANCE_TYPE
+	float4    TexCoord0   : ATTRIBUTE5;
+	float4	  TexCoord1	  : ATTRIBUTE6;
+#endif // INSTANCE_TYPE
+
+	uint InstanceId	: SV_InstanceID;
+	uint VertexId : SV_VertexID;
+};
+
+struct FPositionAndNormalOnlyVertexFactoryInput
+{
+#ifdef MESH_OPT
+	int4	Position	: ATTRIBUTE0;
+	int2	Normal	: ATTRIBUTE2;
+#else
+	float4	Position	: ATTRIBUTE0;
+	half4	Normal		: ATTRIBUTE2;
+#endif
+
+#if INSTANCE_TYPE
+	float4    TexCoord0   : ATTRIBUTE5;
+	float4    TexCoord1   : ATTRIBUTE6;
+#endif // INSTANCE_TYPE
+
+	uint InstanceId	: SV_InstanceID;
+	uint VertexId : SV_VertexID;
+};
+
+/** 
+ * Caches intermediates that would otherwise have to be computed multiple times.  Avoids relying on the compiler to optimize out redundant operations.
+ */
+struct FVertexFactoryIntermediates
+{
+	half3x3 TangentToLocal;
+	half3x3 TangentToWorld;
+	half TangentToWorldSign;
+	half4 Color;
+	uint PrimitiveId;
+	float4 Position;
+	float4 TexCoord0;
+	float3 PreSkinPosition;
+};
+
+float3 DecodeNormals(float2 normal)
+{
+	float3 realNormal;
+	realNormal.x = normal.x / 127.0f;
+	realNormal.y = normal.y / 127.0f;
+	realNormal.z = 1.0f - abs(realNormal.x) - abs(realNormal.y);
+	return realNormal;
+}
+
+float3 DecodeTangents(float2 normal)
+{
+	float3 realNormal;
+	realNormal.x = normal.x / 127.0f;
+	realNormal.y = normal.y / 127.0f;
+	realNormal.z = 1.0f - abs(realNormal.x) - abs(realNormal.y);
+	return realNormal;
+}
+
+
+float4 DecodePosition(float4 pos)
+{
+	return DecodePositionMin + pos * DecodePositionNormConstant;
+}
+
+void DecodeTexCoord0(inout float2 uv)
+{
+	uv.x = uv.x * DecodeUV0NormConstant.x;
+	uv.y = uv.y * DecodeUV0NormConstant.y;
+	uv = DecodeUV0Min + uv;
+}
+
+float4 UGCPosToUE(float4 ugcPos)
+{
+	float4 uePos = ugcPos;
+	uePos.xyz *= 100.0;
+	return uePos.yxzw;
+}
+
+#ifdef MESH_OPT
+float4 GetRealInputPosition(int4 inputPosition)
+{
+	float4 v4f;
+	v4f.x = (float)inputPosition.x;
+	v4f.y = (float)inputPosition.y;
+	v4f.z = (float)inputPosition.z;
+	v4f.w = (float)inputPosition.w;
+	float4 decodedPos = DecodePosition(v4f);
+#if INSTANCE_TYPE
+	return decodedPos;
+#else
+	return UGCPosToUE(decodedPos);
+#endif // INSTANCE_TYPE
+}
+#else
+float4 GetRealInputPosition(float4 inputPosition)
+{
+#if INSTANCE_TYPE
+	return inputPosition;
+#else
+	return UGCPosToUE(inputPosition);
+#endif // INSTANCE_TYPE
+}
+#endif // MESH_OPT
+
+#if MESH_OPT && TEXTURE_COMPRESS
+float4 GetRealInputTexCoord0(int4 inputTexCoord)
+{
+	float4 v4f;
+	v4f.x = (float)inputTexCoord.x;
+	v4f.y = (float)inputTexCoord.y;
+	v4f.z = (float)inputTexCoord.z;
+	v4f.w = (float)inputTexCoord.w;
+	DecodeTexCoord0(v4f.xy);
+	v4f.y = 1.0 - v4f.y;
+	return v4f;
+}
+#else 
+float4 GetRealInputTexCoord0(float4 inputTexCoord)
+{
+	inputTexCoord.y = 1.0 - inputTexCoord.y;
+	return inputTexCoord;
+}
+#endif // MESH_OPT
+
+#ifdef MESH_OPT
+float3 GetRealInputTangentX(int2 inputTangetX)
+{
+	float2 v2f;
+	v2f.x = (float)inputTangetX.x;
+	v2f.y = (float)inputTangetX.y;
+	return DecodeTangents(v2f.xy).yxz;
+}
+#else
+float3 GetRealInputTangentX(float3 inputTangetX)
+{
+	return inputTangetX.yxz;
+}
+#endif // MESH_OPT
+
+#ifdef MESH_OPT
+float3 GetRealInputTangentZ(int2 inputTangetZ)
+{
+	float2 v2f;
+	v2f.x = (float)inputTangetZ.x;
+	v2f.y = (float)inputTangetZ.y;
+	return DecodeNormals(v2f.xy).yxz;
+}
+#else
+half4 GetRealInputTangentZ(half4 inputTangetZ)
+{
+	#if INSTANCE_TYPE == PIPE_INSTANCE
+		return inputTangetZ.xyzw;
+	#else
+		return inputTangetZ.yxzw;
+	#endif // INSTANCE_TYPE == PIPE_INSTANCE
+}
+#endif // MESH_OPT
+
+half3x3 CalcTangentToLocal(FVertexFactoryInput Input, out float TangentSign)
+{
+	half3x3 Result;
+	
+	half3 TangentInputX = GetRealInputTangentX(Input.TangentX);
+	half4 TangentInputZ;
+	TangentInputZ.xyz = GetRealInputTangentZ(Input.TangentZ);
+	#if INSTANCE_TYPE == PIPE_INSTANCE
+		TangentInputZ.xyz = GetInstanceLocalTangentZ(Input.InstanceId, TangentInputZ.xyz, Input.TexCoord0);
+	#endif // INSTANCE_TYPE == PIPE_INSTANCE
+	TangentInputZ.w = 1.0;
+
+	half3 TangentX = TangentBias(TangentInputX);
+	half4 TangentZ = TangentBias(TangentInputZ);
+
+	TangentSign = TangentZ.w;
+
+	// derive the binormal by getting the cross product of the normal and tangent
+	half3 TangentY = cross(TangentZ.xyz, TangentX) * TangentZ.w;
+	
+	// Recalculate TangentX off of the other two vectors
+	// This corrects quantization error since TangentX was passed in as a quantized vertex input
+	// The error shows up most in specular off of a mesh with a smoothed UV seam (normal is smooth, but tangents vary across the seam)
+	Result[0] = cross(TangentY, TangentZ.xyz) * TangentZ.w;
+	Result[1] = TangentY;
+	Result[2] = TangentZ.xyz;
+
+	return Result;
+}
+
+half3x3 CalcTangentToWorldNoScale(FVertexFactoryIntermediates Intermediates, half3x3 TangentToLocal)
+{
+	half3x3 LocalToWorld = GetLocalToWorld3x3(Intermediates.PrimitiveId);
+	half3 InvScale = GetPrimitiveData(Intermediates.PrimitiveId).InvNonUniformScaleAndDeterminantSign.xyz;
+	LocalToWorld[0] *= InvScale.x;
+	LocalToWorld[1] *= InvScale.y;
+	LocalToWorld[2] *= InvScale.z;
+	return mul(TangentToLocal, LocalToWorld); 
+}
+
+
+half3x3 CalcTangentToWorld(FVertexFactoryIntermediates Intermediates, half3x3 TangentToLocal)
+{
+	half3x3 TangentToWorld = CalcTangentToWorldNoScale(Intermediates, TangentToLocal);
+	return TangentToWorld;
+}
+
+FVertexFactoryIntermediates GetVertexFactoryIntermediates(FVertexFactoryInput Input)
+{
+	FVertexFactoryIntermediates Intermediates;
+#if VF_USE_PRIMITIVE_SCENE_DATA
+	Intermediates.PrimitiveId = Input.PrimitiveId;
+#else
+	Intermediates.PrimitiveId = 0;
+#endif
+
+#if INSTANCE_TYPE
+	Intermediates.Color = GetInstanceVertexColor(Input.InstanceId); // Swizzle vertex color.
+#else
+	Intermediates.Color = Input.VertexColor FCOLOR_COMPONENT_SWIZZLE; // Swizzle vertex color.
+#endif // INSTANCE_TYPE
+	
+	// swap r and b for ugc color
+	Intermediates.Color = Intermediates.Color.bgra;
+
+	float TangentSign = 1.0;
+	Intermediates.TangentToLocal = CalcTangentToLocal(Input, TangentSign);
+	Intermediates.TangentToWorld = CalcTangentToWorld(Intermediates,Intermediates.TangentToLocal);
+	Intermediates.TangentToWorldSign = TangentSign * GetPrimitiveData(Intermediates.PrimitiveId).InvNonUniformScaleAndDeterminantSign.w;
+
+	float dH = 0.0;
+	if(HasMultiTemporalWeight > 0)
+	{
+		dH = Input.VertexWeight * 100.0;
+	}
+
+	Intermediates.Position = GetRealInputPosition(Input.Position);
+	Intermediates.Position.z+= dH;
+	Intermediates.PreSkinPosition = Intermediates.Position.xyz;
+
+#if INSTANCE_TYPE == PIPE_INSTANCE
+	Intermediates.TexCoord0 = GetInstanceTexCoord(Input.InstanceId, Input.TexCoord0);
+#else
+	Intermediates.TexCoord0 = GetRealInputTexCoord0(Input.TexCoord0);
+#endif // INSTANCE_TYPE == PIPE_INSTANCE
+
+	return Intermediates;
+}
+
+FMaterialPixelParameters GetMaterialPixelParameters(FVertexFactoryInterpolantsVSToPS Interpolants, float4 SvPosition)
+{
+	// GetMaterialPixelParameters is responsible for fully initializing the result
+	FMaterialPixelParameters Result = MakeInitializedMaterialPixelParameters();
+
+#if NUM_TEX_COORD_INTERPOLATORS
+	UNROLL
+	for( int CoordinateIndex = 0; CoordinateIndex < NUM_TEX_COORD_INTERPOLATORS; CoordinateIndex++ )
+	{
+		Result.TexCoords[CoordinateIndex] = GetUV(Interpolants, CoordinateIndex);
+	}
+#endif
+
+#if USE_PARTICLE_SUBUVS
+	// Output TexCoord0 for when previewing materials that use ParticleSubUV.
+	Result.Particle.SubUVCoords[0] = GetUV(Interpolants, 0);
+	Result.Particle.SubUVCoords[1] = GetUV(Interpolants, 0);
+#endif	// USE_PARTICLE_SUBUVS
+
+	half3 TangentToWorld0 = GetTangentToWorld0(Interpolants).xyz;
+	half4 TangentToWorld2 = GetTangentToWorld2(Interpolants);
+	Result.UnMirrored = TangentToWorld2.w;
+
+	Result.VertexColor = Interpolants.Color;
+
+	// Required for previewing materials that use ParticleColor
+	Result.Particle.Color = half4(1,1,1,1);
+#if USE_INSTANCING
+	Result.PerInstanceParams = Interpolants.PerInstanceParams;
+#endif
+
+	Result.TangentToWorld = AssembleTangentToWorld( TangentToWorld0, TangentToWorld2 );
+#if USE_WORLDVERTEXNORMAL_CENTER_INTERPOLATION
+	Result.WorldVertexNormal_Center = Interpolants.TangentToWorld2_Center.xyz;
+#endif
+
+#if LIGHTMAP_UV_ACCESS
+#if NEEDS_LIGHTMAP_COORDINATE
+	#if (ES3_1_PROFILE)
+		// Not supported in pixel shader
+		Result.LightmapUVs = float2(0, 0);
+	#else
+		Result.LightmapUVs = Interpolants.LightMapCoordinate.xy;
+	#endif	// ES3_1_PROFILE
+#endif	// NEEDS_LIGHTMAP_COORDINATE
+#endif	// LIGHTMAP_UV_ACCESS
+
+	Result.TwoSidedSign = 1;
+	Result.PrimitiveId = GetPrimitiveId(Interpolants);
+
+#if NEEDS_PARTICLE_LOCAL_TO_WORLD
+	Result.Particle.ParticleToWorld = GetPrimitiveData(Result.PrimitiveId).LocalToWorld;
+#endif
+
+#if NEEDS_PARTICLE_WORLD_TO_LOCAL
+	Result.Particle.WorldToParticle = GetPrimitiveData(Result.PrimitiveId).WorldToLocal;
+#endif
+
+	return Result;
+}
+
+
+void ConverVertexInputToMaterialVertexParams(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, inout FMaterialVertexParameters Result)
+{
+	
+#if NUM_MATERIAL_TEXCOORDS_VERTEX
+	// put texcoordMatrix value in Result.TexCoords[1], 
+	// and Result.TexCoords[1].x is texcoordMatrix of texcoord0,  Result.TexCoords[1].y is texcoordMatrix of texcoord1.
+	// only support 1 texcoord.
+	Result.TexCoords[0] = Intermediates.TexCoord0.xy;
+#if NUM_MATERIAL_TEXCOORDS_VERTEX > 1
+	if(HasTexMatrixBuffer > 0)
+	{
+		Result.TexCoords[1].x = Input.TexMatrix.x;
+	}
+	else
+	{
+		Result.TexCoords[1].x = Intermediates.TexCoord0.z;
+	}
+	Result.TexCoords[1].y = 0.0;
+#endif
+
+#if NUM_MATERIAL_TEXCOORDS_VERTEX > 3
+	// swap r and b for ugc color
+	#if INSTANCE_TYPE
+		half4 secondsColor = GetInstanceSecondColor(Input.InstanceId);
+	#else
+		half4 secondsColor = Input.SecondsColor.bgra;
+	#endif // INSTANCE_TYPE
+	Result.TexCoords[2] = secondsColor.rg;
+	Result.TexCoords[3] = secondsColor.ba;
+#endif // NUM_MATERIAL_TEXCOORDS_VERTEX
+
+#if NUM_MATERIAL_TEXCOORDS_VERTEX > 4
+	if(HasVertexWeight > 0)
+	{
+		Result.TexCoords[4].x = Input.VertexWeight * 100;
+		Result.TexCoords[4].y = Input.VertexWeight * 100;
+	}
+	else
+	{
+		Result.TexCoords[4].x = Input.Position.w * 100;
+		Result.TexCoords[4].y = Input.Position.w * 100;
+	}
+
+#endif
+
+#if NUM_MATERIAL_TEXCOORDS_VERTEX > 5
+	Result.TexCoords[5] = Input.TilingTexCoord.xy;
+#endif
+
+#endif  // NUM_MATERIAL_TEXCOORDS_VERTEX
+}
+
+FMaterialVertexParameters GetMaterialVertexParameters(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, float3 WorldPosition, float3x3 TangentToLocal)
+{
+	FMaterialVertexParameters Result = (FMaterialVertexParameters)0;
+	Result.WorldPosition = WorldPosition;
+	Result.VertexColor = Intermediates.Color;
+	Result.TangentToWorld = Intermediates.TangentToWorld;
+	Result.PrimitiveId = Intermediates.PrimitiveId;
+
+	ConverVertexInputToMaterialVertexParams(Input, Intermediates, Result);
+
+	Result.PrimitiveId = Intermediates.PrimitiveId;
+
+	return Result;
+}
+
+#if INSTANCE_TYPE
+float4 CalcWorldPosition(uint inputInstanceId, float4 texcoord0, float4 Position, uint PrimitiveId)
+{	
+	float4x4 instanceLocalMatrix = GetInstanceLocalMatrix(inputInstanceId, texcoord0);
+	float4 tempPos = float4(Position.xyz, 1.0);
+	tempPos = mul(tempPos, instanceLocalMatrix);
+	float4 localPosition = UGCPosToUE(tempPos);
+	return TransformLocalToTranslatedWorld(localPosition.xyz, PrimitiveId);
+}
+#else
+float4 CalcWorldPosition(float4 Position, uint PrimitiveId)
+{
+	return TransformLocalToTranslatedWorld(Position.xyz, PrimitiveId);
+}
+#endif // INSTANCE_TYPE
+
+/** for depth-only pass */
+float4 VertexFactoryGetWorldPosition(FPositionOnlyVertexFactoryInput Input)
+{
+	float4 Position = GetRealInputPosition(Input.Position);
+	uint PrimitiveId = 0;
+#if INSTANCE_TYPE
+	return CalcWorldPosition(Input.InstanceId, Input.TexCoord0, Position, PrimitiveId);
+#else
+	return CalcWorldPosition(Position, PrimitiveId);
+#endif // INSTANCE_TYPE
+}
+
+/** for depth-only pass (slope depth bias) */
+float4 VertexFactoryGetWorldPosition(FPositionAndNormalOnlyVertexFactoryInput Input)
+{
+	float4 Position = GetRealInputPosition(Input.Position);
+	uint PrimitiveId = 0;
+#if INSTANCE_TYPE
+	return CalcWorldPosition(Input.InstanceId, Input.TexCoord0, Position, PrimitiveId);
+#else
+	return CalcWorldPosition(Position, PrimitiveId);
+#endif // INSTANCE_TYPE
+}
+
+float4 VertexFactoryGetWorldPosition(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+#if INSTANCE_TYPE
+	return CalcWorldPosition(Input.InstanceId, Input.TexCoord0, Intermediates.Position, Intermediates.PrimitiveId);
+#else
+	return CalcWorldPosition(Intermediates.Position, Intermediates.PrimitiveId);
+#endif // INSTANCE_TYPE
+}
+
+float4 VertexFactoryGetRasterizedWorldPosition(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, float4 InWorldPosition)
+{
+	return InWorldPosition;
+}
+
+float3 VertexFactoryGetPositionForVertexLighting(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, float3 TranslatedWorldPosition)
+{
+	return TranslatedWorldPosition;
+}
+
+float3 VertexFactoryGetWorldNormal(FPositionAndNormalOnlyVertexFactoryInput Input)
+{
+	float4 TangentInputZ;
+	TangentInputZ.xyz = GetRealInputTangentZ(Input.Normal);
+	#if INSTANCE_TYPE == PIPE_INSTANCE
+		TangentInputZ.xyz = GetInstanceLocalTangentZ(Input.InstanceId, TangentInputZ.xyz, Input.TexCoord0);
+	#endif // INSTANCE_TYPE == PIPE_INSTANCE
+	uint PrimitiveId = 0;
+	return RotateLocalToWorld(TangentInputZ.xyz, PrimitiveId);
+}
+
+FVertexFactoryInterpolantsVSToPS VertexFactoryGetInterpolantsVSToPS(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, FMaterialVertexParameters VertexParameters)
+{
+	FVertexFactoryInterpolantsVSToPS Interpolants;
+
+	// Initialize the whole struct to 0
+	// Really only the last two components of the packed UVs have the opportunity to be uninitialized
+	Interpolants = (FVertexFactoryInterpolantsVSToPS)0;
+
+#if NUM_TEX_COORD_INTERPOLATORS
+	float2 CustomizedUVs[NUM_TEX_COORD_INTERPOLATORS];
+	GetMaterialCustomizedUVs(VertexParameters, CustomizedUVs);
+	GetCustomInterpolators(VertexParameters, CustomizedUVs);
+	
+	UNROLL
+	for (int CoordinateIndex = 0; CoordinateIndex < NUM_TEX_COORD_INTERPOLATORS; CoordinateIndex++)
+	{
+		SetUV(Interpolants, CoordinateIndex, CustomizedUVs[CoordinateIndex]);
+	}
+
+#elif NUM_MATERIAL_TEXCOORDS_VERTEX == 0 && USE_PARTICLE_SUBUVS
+	#if MANUAL_VERTEX_FETCH
+		SetUV(Interpolants, 0, LocalVF.VertexFetch_TexCoordBuffer[LocalVF.VertexFetch_Parameters[VF_NumTexcoords_Index] * (LocalVF.VertexFetch_Parameters[VF_VertexOffset] + Input.VertexId)]);
+	#else
+		SetUV(Interpolants, 0, Input.TexCoords[0]);
+	#endif
+#endif
+
+#if NEEDS_LIGHTMAP_COORDINATE
+	float2 LightMapCoordinate = 0;
+	float2 ShadowMapCoordinate = 0;
+
+	float2 LightMapCoordinateInput = Input.LightMapCoordinate;
+
+	uint LightmapDataIndex = 0;
+
+#if VF_USE_PRIMITIVE_SCENE_DATA
+	LightmapDataIndex = GetPrimitiveData(Intermediates.PrimitiveId).LightmapDataIndex + LocalVF.LODLightmapDataIndex;
+#endif
+
+	float4 LightMapCoordinateScaleBias = GetLightmapData(LightmapDataIndex).LightMapCoordinateScaleBias;
+
+	LightMapCoordinate = LightMapCoordinateInput * LightMapCoordinateScaleBias.xy + LightMapCoordinateScaleBias.zw;
+
+	#if STATICLIGHTING_TEXTUREMASK
+		float4 ShadowMapCoordinateScaleBias = GetLightmapData(LightmapDataIndex).ShadowMapCoordinateScaleBias;
+
+		#if USE_INSTANCING
+			ShadowMapCoordinate = LightMapCoordinateInput * ShadowMapCoordinateScaleBias.xy + GetInstanceShadowMapBias(Intermediates);
+		#else
+			ShadowMapCoordinate = LightMapCoordinateInput * ShadowMapCoordinateScaleBias.xy + ShadowMapCoordinateScaleBias.zw;
+		#endif
+	#endif	// STATICLIGHTING_TEXTUREMASK
+
+	SetLightMapCoordinate(Interpolants, LightMapCoordinate, ShadowMapCoordinate);
+	SetLightmapDataIndex(Interpolants, LightmapDataIndex);
+#endif	// NEEDS_LIGHTMAP_COORDINATE
+
+	SetTangents(Interpolants, Intermediates.TangentToWorld[0], Intermediates.TangentToWorld[2], Intermediates.TangentToWorldSign);
+	SetColor(Interpolants, Intermediates.Color);
+
+#if INSTANCED_STEREO
+	Interpolants.EyeIndex = 0;
+#endif
+
+	SetPrimitiveId(Interpolants, Intermediates.PrimitiveId);
+
+	return Interpolants;
+}
+
+float4 VertexFactoryGetPreviousWorldPosition(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+	float4x4 PreviousLocalToWorldTranslated = GetPrimitiveData(Intermediates.PrimitiveId).PreviousLocalToWorld;
+	PreviousLocalToWorldTranslated[3][0] += ResolvedView.PrevPreViewTranslation.x;
+	PreviousLocalToWorldTranslated[3][1] += ResolvedView.PrevPreViewTranslation.y;
+	PreviousLocalToWorldTranslated[3][2] += ResolvedView.PrevPreViewTranslation.z;
+
+	return mul(Intermediates.Position, PreviousLocalToWorldTranslated);
+}
+
+
+half3x3 VertexFactoryGetTangentToLocal( FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates )
+{
+	return Intermediates.TangentToLocal;
+}
+
+#if INSTANCED_STEREO
+uint VertexFactoryGetEyeIndex(uint InstanceId)
+{
+	return 0;
+}
+#endif
+
+float4 VertexFactoryGetTranslatedPrimitiveVolumeBounds(FVertexFactoryInterpolantsVSToPS Interpolants)
+{
+	return 0;
+}
+
+float3 VertexFactoryGetWorldNormal(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates)
+{
+	return Intermediates.TangentToWorld[2];
+}
+
+uint VertexFactoryGetPrimitiveId(FVertexFactoryInterpolantsVSToPS Interpolants)
+{
+	return GetPrimitiveId(Interpolants);
+}
+
+#if USING_TESSELLATION
+	struct FVertexFactoryInterpolantsVSToDS
+	{
+		FVertexFactoryInterpolantsVSToPS InterpolantsVSToPS;
+	};
+
+	float2 VertexFactoryGetTextureCoordinateDS( FVertexFactoryInterpolantsVSToDS Interpolants )
+	{
+		return float2(0,0);
+	}
+
+	FVertexFactoryInterpolantsVSToPS VertexFactoryAssignInterpolants(FVertexFactoryInterpolantsVSToDS Input)
+	{
+		return Input.InterpolantsVSToPS;
+	}
+
+	/** Converts from vertex factory specific interpolants to a FMaterialTessellationParameters, which is used by material inputs. */
+	FMaterialTessellationParameters GetMaterialTessellationParameters(FVertexFactoryInterpolantsVSToDS Interpolants, float3 CameraLocalWorldPosition)
+	{
+		FMaterialTessellationParameters	Result;
+		return Result;
+	}
+
+	FVertexFactoryInterpolantsVSToDS VertexFactoryGetInterpolantsVSToDS(FVertexFactoryInput Input, FVertexFactoryIntermediates Intermediates, FMaterialVertexParameters VertexParameters)
+	{
+		FVertexFactoryInterpolantsVSToDS Interpolants;
+		Interpolants.InterpolantsVSToPS = VertexFactoryGetInterpolantsVSToPS(Input, Intermediates, VertexParameters);
+		return Interpolants;
+	}
+
+	FVertexFactoryInterpolantsVSToDS VertexFactoryInterpolate(FVertexFactoryInterpolantsVSToDS a, float aInterp, FVertexFactoryInterpolantsVSToDS b, float bInterp)
+	{
+		// Default initialize. Otherwise, some graphics pipelines that
+		// couple tessellation with geometry shaders won't write to all TEXCOORD semantics,
+		// but read from them when <FVertexFactoryInterpolantsVSToDS> is being copied as a whole.
+		FVertexFactoryInterpolantsVSToDS O = (FVertexFactoryInterpolantsVSToDS)0;
+		return O;
+	}
+
+	float3x3 VertexFactoryGetTangentToLocalDS(FVertexFactoryInterpolantsVSToDS Interpolants)
+	{
+		return float3x3(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
+	}
+#endif // #if USING_TESSELLATION

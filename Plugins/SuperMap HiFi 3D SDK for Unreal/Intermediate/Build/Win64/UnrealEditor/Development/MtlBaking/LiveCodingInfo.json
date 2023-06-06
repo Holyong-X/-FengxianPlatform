@@ -1,0 +1,13 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MtlBaking.cpp.obj": [
+			"AddCustomAttributeHack.cpp.obj",
+			"MaterialBakingHelpers.cpp.obj",
+			"MaterialBakingModule.cpp.obj",
+			"MaterialPropertyEx.cpp.obj",
+			"MaterialRenderItem.cpp.obj",
+			"MaterialRenderItemData.cpp.obj"
+		]
+	}
+}

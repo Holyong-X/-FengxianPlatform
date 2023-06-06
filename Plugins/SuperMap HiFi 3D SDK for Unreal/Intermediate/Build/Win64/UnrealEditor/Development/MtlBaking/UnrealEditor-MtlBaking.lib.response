@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MtlBaking.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Unreal Engine\Project\FengxianPlatform\Intermediate\Build\Win64\FengxianPlatformEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlBaking\Module.MtlBaking.cpp.obj"
+"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlBaking\Default.rc2.res"
+/OUT:"E:\Unreal Engine\Project\FengxianPlatform\Plugins\SuperMap HiFi 3D SDK for Unreal\Intermediate\Build\Win64\UnrealEditor\Development\MtlBaking\UnrealEditor-MtlBaking.lib"

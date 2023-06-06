@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ColorTable version="1.0">
+  <Header>
+    <Type>SCTU</Type>
+    <ItemCount>32</ItemCount>
+  </Header>
+  <Items>
+    <Item value="0" color="FF7ADDCD" />
+    <Item value="2.90322580645161" color="FF81E0C3" />
+    <Item value="5.80645161290323" color="FF88E4B9" />
+    <Item value="8.70967741935484" color="FF90E7AF" />
+    <Item value="11.6129032258065" color="FF97EBA4" />
+    <Item value="14.5161290322581" color="FFA7EEA5" />
+    <Item value="17.4193548387097" color="FFBDF3AD" />
+    <Item value="20.3225806451613" color="FFD4F7B6" />
+    <Item value="23.2258064516129" color="FFEBFBBF" />
+    <Item value="26.1290322580645" color="FFFEFFC4" />
+    <Item value="29.0322580645161" color="FFFEFFB8" />
+    <Item value="31.9354838709677" color="FFFEFFAC" />
+    <Item value="34.8387096774194" color="FFFFFFA0" />
+    <Item value="37.741935483871" color="FFFFFF93" />
+    <Item value="40.6451612903226" color="FFEEE97F" />
+    <Item value="43.5483870967742" color="FFD6C968" />
+    <Item value="46.4516129032258" color="FFBFAA51" />
+    <Item value="49.3548387096774" color="FFA78A3A" />
+    <Item value="52.258064516129" color="FF977733" />
+    <Item value="55.1612903225806" color="FF9C8355" />
+    <Item value="58.0645161290323" color="FFA18E77" />
+    <Item value="60.9677419354839" color="FFA6999A" />
+    <Item value="63.8709677419355" color="FFAAA4BC" />
+    <Item value="66.7741935483871" color="FFAFA6C1" />
+    <Item value="69.6774193548387" color="FFB4A6C1" />
+    <Item value="72.5806451612903" color="FFB9A6C2" />
+    <Item value="75.4838709677419" color="FFBEA6C2" />
+    <Item value="78.3870967741936" color="FFC7AFC8" />
+    <Item value="81.2903225806452" color="FFD5C3D6" />
+    <Item value="84.1935483870968" color="FFE3D7E3" />
+    <Item value="87.0967741935484" color="FFF1EBF1" />
+    <Item value="90" color="FFFFFFFF" />
+  </Items>
+</ColorTable>

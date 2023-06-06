@@ -1,0 +1,80 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.SuperMapSamples.cpp.obj": [
+			"FSuperMap_MouseControl.cpp.obj",
+			"SuperMap_MeasureHandler.cpp.obj",
+			"SuperMap_DataInfoProcessing.cpp.obj",
+			"SuperMap_DataServiceRequest.cpp.obj",
+			"SuperMap_ExcavationInstance.cpp.obj",
+			"SuperMap_FlyManagerInstance.cpp.obj",
+			"SuperMap_FlyPositionInstance.cpp.obj",
+			"SuperMap_GeometryQuery.cpp.obj",
+			"SuperMap_ObjectOperation.cpp.obj",
+			"SuperMap_RectSelect.cpp.obj",
+			"SuperMap_SwipeInstance.cpp.obj",
+			"SuperMap_CalculationTinInstance.cpp.obj",
+			"SuperMap_ClipBoxInstance.cpp.obj",
+			"SuperMap_ClusterInstance.cpp.obj",
+			"SuperMap_ContourMapInstance.cpp.obj",
+			"SuperMap_FacadeInstance.cpp.obj",
+			"SuperMap_FlattenInstance.cpp.obj",
+			"SuperMap_FloodInstance.cpp.obj",
+			"SuperMap_MultiViewShed3DInstance.cpp.obj",
+			"SuperMap_ProfileInstance.cpp.obj",
+			"SuperMap_ProjectionImageInstance.cpp.obj",
+			"SuperMap_SightlineInstance.cpp.obj",
+			"SuperMap_SkylineInstance.cpp.obj",
+			"SuperMap_SlopeInstance.cpp.obj",
+			"SuperMap_ViewDomeInstance.cpp.obj",
+			"SuperMap_ViewShedInstance.cpp.obj",
+			"SuperMapSamples.cpp.obj",
+			"SuperMap_AttributeQuery.cpp.obj",
+			"SuperMap_CloudLicense.cpp.obj",
+			"SuperMap_EditorMode.cpp.obj",
+			"SuperMap_EditorModeToolkit.cpp.obj",
+			"SuperMap_GIS.cpp.obj",
+			"SuperMap_MainActor.cpp.obj",
+			"SuperMap_DetailsViewInfos.cpp.obj"
+		],
+		"Module.SuperMapSamples.gen.1_of_4.cpp.obj": [
+			"SuperMapSamples.init.gen.cpp.obj",
+			"SuperMap_AttributeQuery.gen.cpp.obj",
+			"SuperMap_CalculationTinInstance.gen.cpp.obj",
+			"SuperMap_ClipBoxInstance.gen.cpp.obj",
+			"SuperMap_CloudLicense.gen.cpp.obj",
+			"SuperMap_ClusterInstance.gen.cpp.obj",
+			"SuperMap_ContourMapInstance.gen.cpp.obj",
+			"SuperMap_DataInfoProcessing.gen.cpp.obj",
+			"SuperMap_DataServiceRequest.gen.cpp.obj"
+		],
+		"Module.SuperMapSamples.gen.2_of_4.cpp.obj": [
+			"SuperMap_DetailsViewInfos.gen.cpp.obj",
+			"SuperMap_ExcavationInstance.gen.cpp.obj",
+			"SuperMap_FacadeInstance.gen.cpp.obj",
+			"SuperMap_FlattenInstance.gen.cpp.obj",
+			"SuperMap_FloodInstance.gen.cpp.obj",
+			"SuperMap_FlyManagerInstance.gen.cpp.obj",
+			"SuperMap_FlyPositionInstance.gen.cpp.obj",
+			"SuperMap_GeometryQuery.gen.cpp.obj",
+			"SuperMap_GIS.gen.cpp.obj"
+		],
+		"Module.SuperMapSamples.gen.3_of_4.cpp.obj": [
+			"SuperMap_MainActor.gen.cpp.obj",
+			"SuperMap_MeasureHandler.gen.cpp.obj",
+			"SuperMap_MultiViewShed3DInstance.gen.cpp.obj",
+			"SuperMap_ObjectOperation.gen.cpp.obj",
+			"SuperMap_ProfileInstance.gen.cpp.obj",
+			"SuperMap_ProjectionImageInstance.gen.cpp.obj"
+		],
+		"Module.SuperMapSamples.gen.4_of_4.cpp.obj": [
+			"SuperMap_RectSelect.gen.cpp.obj",
+			"SuperMap_SightlineInstance.gen.cpp.obj",
+			"SuperMap_SkylineInstance.gen.cpp.obj",
+			"SuperMap_SlopeInstance.gen.cpp.obj",
+			"SuperMap_SwipeInstance.gen.cpp.obj",
+			"SuperMap_ViewDomeInstance.gen.cpp.obj",
+			"SuperMap_ViewShedInstance.gen.cpp.obj"
+		]
+	}
+}

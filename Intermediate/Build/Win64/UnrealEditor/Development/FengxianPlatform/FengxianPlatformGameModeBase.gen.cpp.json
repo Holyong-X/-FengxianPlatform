@@ -1,0 +1,19 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\unrealeditor\\inc\\fengxianplatform\\fengxianplatformgamemodebase.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\fengxianplatformeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\unrealeditor\\development\\fengxianplatform\\definitions.fengxianplatform.h",
+            "e:\\unreal engine\\project\\fengxianplatform\\source\\fengxianplatform\\fengxianplatformgamemodebase.h",
+            "d:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "d:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "d:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\serverstatreplicator.generated.h",
+            "d:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\gamemodebase.generated.h",
+            "e:\\unreal engine\\project\\fengxianplatform\\intermediate\\build\\win64\\unrealeditor\\inc\\fengxianplatform\\fengxianplatformgamemodebase.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

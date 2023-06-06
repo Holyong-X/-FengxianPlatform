@@ -1,0 +1,26 @@
+#include "/Engine/Public/Platform.ush"
+#include "/Engine/Private/Common.ush"
+
+
+void MainVS(
+	in float4 InPosition: ATTRIBUTE0,
+	in float2 InUV : ATTRIBUTE1,
+	out float2 OutUV : TEXCOORD0,
+	out float4 OutPosition : SV_POSITION
+)
+{
+	OutPosition = (InPosition - 0.5) * 2.0;
+	OutPosition.z = 0.0;
+	OutPosition.w = 1.0;
+	OutUV = InUV;
+}
+
+
+void MainPS(
+in float2 UV : TEXCOORD0, 
+in float4 Position: SV_POSITION,
+out float4 OutColor : SV_Target0
+)
+{
+	OutColor = float4(UV.x, 1.0, 0.0,1.0);
+}
